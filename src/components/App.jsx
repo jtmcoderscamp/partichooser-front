@@ -1,6 +1,6 @@
 import React from "react";
 import SampleComponent from "./SampleComponent";
-import LogComponent from "./SampleComponent/log";
+import LogIn from "./LogInForm/form";
 
 export default class App extends React.Component {
   buttonHandle() {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
     return (
       <>
         <SampleComponent message="Nothing to see here!"></SampleComponent>
-        <LogComponent />
+        <LogIn />
       </>
     );
   }
