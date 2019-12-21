@@ -48,9 +48,9 @@ export default class LogIn extends React.Component {
   render() {
     const form = (
       <form onSubmit={e => this.handleSubmit(e)}>
-        <div>
+        <div className="main-form">
           <div>
-            <div className="col-6 name">
+            <div>
               <label>
                 <span>Your login</span>
                 <br />
