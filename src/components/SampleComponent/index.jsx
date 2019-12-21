@@ -1,4 +1,5 @@
 import React from "react";
+import "./sampleComponent.css";
 
 export default class SampleComponent extends React.Component {
   render() {
