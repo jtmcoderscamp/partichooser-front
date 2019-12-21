@@ -1,3 +1,400 @@
-.main-form {
-  background-color: green;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1rem -0.5rem 0 -0.5rem;
+}
+
+.col-xs-1 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 8.33333%;
+}
+
+.col-xs-2 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 16.66667%;
+}
+
+.col-xs-3 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 25%;
+}
+
+.col-xs-4 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 33.33333%;
+}
+
+.col-xs-5 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 41.66667%;
+}
+
+.col-xs-6 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 50%;
+}
+
+.col-xs-7 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 58.33333%;
+}
+
+.col-xs-8 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 66.66667%;
+}
+
+.col-xs-9 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 75%;
+}
+
+.col-xs-10 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 83.33333%;
+}
+
+.col-xs-11 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 91.66667%;
+}
+
+.col-xs-12 {
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .col-sm-1 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 8.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-2 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 16.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-3 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-4 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 33.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-5 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 41.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-6 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-7 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 58.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-8 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 66.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-9 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-10 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 83.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-11 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 91.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-sm-12 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-1 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 8.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-2 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 16.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-3 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 33.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-5 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 41.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-7 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 58.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-8 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 66.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-9 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-10 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 83.33333%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-11 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 91.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-12 {
+    margin-top: 1rem;
+    padding: 0 0.5rem;
+    width: 100%;
+  }
+}
+
+html,
+body {
+  background-color: rgb(255, 255, 255);
+  color: rgb(41, 41, 41);
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-size: 16px;
+}
+
+.wrapper-image {
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.wrapper-text {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
+.image-cover {
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.image-cover::before {
+  background-image: url(../../assets/office-1209640_1920.jpg);
+  background-size: cover;
+  content: "";
+  display: block;
+  height: 100vh;
+  left: 0;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.logo {
+  position: relative;
+}
+
+.logo::after {
+  background-image: url(../../assets/logo-coderscamp.png);
+  background-size: contain;
+  background-repeat: round;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 10rem;
+  left: 1rem;
+  position: absolute;
+  top: 1rem;
+  width: 10rem;
+  z-index: 2;
+}
+
+.login-main {
+  height: 100vh;
+  margin-top: 15rem;
+  z-index: 33;
+}
+
+.btn {
+  align-items: center;
+  background-color: rgb(255, 197, 60);
+  border: none;
+  border-radius: 6px;
+  color: rgb(41, 41, 41);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 700;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: all 0.25s ease-in-out 0s;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: rgb(252, 182, 20);
+}
+
+.inputWithoutError {
+  background-color: transparent;
+  border-color: gray;
+  border-width: 0 0 2px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  outline: 0;
+  width: 100%;
+}
+
+.inputWithError {
+  background-color: transparent;
+  border-color: red;
+  border-width: 0 0 2px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  outline: 0;
+  width: 100%;
+}
+
+.errors-form {
+  color: red;
+  font-size: 0.875rem;
+  padding-bottom: 0.5rem;
+}
+
+.login-form {
+  margin: 0;
+}
+
+.name,
+.email {
+  margin-bottom: 1rem;
 }
