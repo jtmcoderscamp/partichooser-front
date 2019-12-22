@@ -1,5 +1,16 @@
 .menu {
   display: flex;
-  height: 15px;
+  height: 7vh;
   width: 100vw;
+  justify-content: flex-end;
+  align-content: center;
+  border: solid black;
+}
+
+.menu .button {
+  margin: auto 10px;
+}
+
+.menu .ikona {
+  margin-right: 70%;
 }
