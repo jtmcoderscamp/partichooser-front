@@ -1,0 +1,19 @@
+.heading {
+  width: fit-content;
+  color: #999;
+  box-shadow: inset 0 -3px 0 0 #ffc53d;
+}
+
+.centered {
+  text-align: center;
+}
+
+.action {
+  font-size: 20px;
+  color: #ffc53d;
+  cursor: pointer;
+}
+
+table.list {
+  width: 100%;
+}
