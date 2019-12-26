@@ -13,12 +13,6 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
-          See how this part doesn't change at all
-          <br />
-          <Link to="/">HOME</Link>
-        </div>
-
         <Switch>
           <Route exact path="/">
             <LoginView />

@@ -13,12 +13,22 @@ class FakeLogInForm extends React.Component {
     super(props);
 
     this.state = {
-      userName: ""
+      userName: "",
+      userSurname: "",
+      userMail: ""
     };
   }
 
   onUserNameChange(e) {
     this.setState({ userName: e.target.value });
+  }
+
+  onUserSurnameChange(e) {
+    this.setState({ userSurname: e.target.value });
+  }
+
+  onUserMailChange(e) {
+    this.setState({ userMail: e.target.value });
   }
 
   onLogInButtonClick() {
@@ -34,6 +44,14 @@ class FakeLogInForm extends React.Component {
         <Input
           placeholder="user name"
           onChange={this.onUserNameChange.bind(this)}
+        />
+        <Input
+          placeholder="user surname"
+          onChange={this.onUserSurnameChange.bind(this)}
+        />
+        <Input
+          placeholder="user mail"
+          onChange={this.onUserMailChange.bind(this)}
         />
         <Button
           type="primary"
