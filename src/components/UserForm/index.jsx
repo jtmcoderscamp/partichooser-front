@@ -1,15 +1,97 @@
 import React from "react";
 import "./userForm.css";
+import { Button, Input } from "antd";
 
 export default class UserForm extends React.Component {
-    render() {
-      return (
-        <div className="user-form">
-          <h1>{this.props.message}</h1>
-          {this.props.children}
-        </div>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: "",
+      userSurname: "",
+      userEmail: "",
+      userTestResult: ""
+    };
   }
 
-  //copied and changed from SampleComponent
+  addUserName(e) {
+    this.setState({ userName: e.target.value });
+  }
+  addUserSurname(e) {
+    this.setState({ userSurname: e.target.value });
+  }
+  addUserEmail(e) {
+    this.setState({ userEmail: e.target.value });
+  }
+  addUserTestResult(e) {
+    this.setState({ userTestResult: e.target.value });
+  }
+
+  addUserButtonClick() {
+    // this.props.reduxLogIn({
+    //   name: this.state.userName ? this.state.userName : "nameless"
+    //  });
+    //   surname: this.state.userSurname ? this.state.userSurname : "nameless"
+    //  });
+    //  email: this.state.userEmail ? this.state.userEmail : "nameless@email.com"
+    //  });
+    //   testResult: this.state.userTestResult ? this.state.userTestResult : "100"
+    //  });
+    // this.props.history.push("/participants");
+  }
+
+  render() {
+    return (
+      <div className="user-form">
+        <h1>Add user</h1>
+        <div className="inputBar">
+          <h2>Name</h2>
+          <Input
+            className="inp"
+            placeholder="Input name"
+            onChange={this.addUserName.bind(this)}
+          ></Input>
+        </div>
+
+        <div className="inputBar">
+          <h2>Surname</h2>
+          <Input
+            className="inp"
+            placeholder="Input surname"
+            onChange={this.addUserSurname.bind(this)}
+          ></Input>
+        </div>
+
+        <div className="inputBar">
+          <h2>Email</h2>
+          <Input
+            className="inp"
+            placeholder="Input email"
+            onChange={this.addUserEmail.bind(this)}
+          ></Input>
+        </div>
+
+        <div className="inputBar">
+          <h2>Test results</h2>
+          <Input
+            className="inp"
+            placeholder="Test results"
+            onChange={this.addUserTestResult.bind(this)}
+          ></Input>
+        </div>
+
+        <div className="btn">
+          <Button
+            className="addUserBtn"
+            type="default"
+            shape="round"
+            icon="plus"
+            block={true}
+            onClick={this.addUserButtonClick.bind(this)}
+          >
+            Add user
+          </Button>
+        </div>
+      </div>
+    );
+  }
+}

@@ -1,4 +1,40 @@
 .user-form {
-    color: #833;
-  }
-  
+  text-align: center;
+  background-color: #292929;
+}
+h1 {
+  color: white;
+}
+h2 {
+  color: white;
+}
+
+.inputBar {
+  margin: 20px auto;
+  width: 60%;
+  border-color: #ffc53d;
+}
+
+.inp {
+  border-color: #ffc53d;
+}
+
+.btn {
+  text-align: center;
+}
+
+.addUserBtn:hover {
+  background-color: #ffc53d;
+  border-color: #ffc53d;
+  color: black;
+  transform: scale(1.1);
+}
+
+.addUserBtn {
+  background-color: #ffc53d;
+  border-color: #ffc53d;
+  color: black;
+  width: auto;
+  margin: 10px;
+  transition: all 0, 3s;
+}
