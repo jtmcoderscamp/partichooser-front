@@ -3,10 +3,12 @@ import thunkMiddleware from "redux-thunk";
 
 //Import reducers
 import userAuth from "./reducers/userAuth";
+import addUser from "./reducers/addUser";
 
 //Set up combined reducer
 const rootReducer = combineReducers({
-  userAuth
+  userAuth,
+  addUser
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

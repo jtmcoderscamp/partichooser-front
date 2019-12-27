@@ -21,5 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-src/components/FakeLogInForm/index.jsx
-src/components/_views/LoginView.jsx
