@@ -1,39 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import SampleComponent from "../SampleComponent";
 import { withRouter } from "react-router";
 import { ParticipantList } from "../ParticipantList";
+import {
+  ADD_PARTICIPANT,
+  GET_PARTICIPANTS
+} from "../../redux/actions/participants";
 
 /**
  * A relatively simple functional component,
  * it's only real purpose is to show that redux works and there's a username that ends up in the store
  */
 function ParticipantPickingView(props) {
+  const { participants, user, getParticipants, addParticipant } = props;
+
+  useEffect(() => {
+    getParticipants();
+  }, [getParticipants]);
+
   return (
     <SampleComponent message="This is the view for choosing participants to groups ">
       <div>
-        {props.user.name
-          ? `You're logged in as "${props.user.name}"`
+        {user.name
+          ? `You're logged in as "${user.name}"`
           : `You're not logged in`}
       </div>
       <ParticipantList
         city="Wroclaw"
-        participants={[
-          {
-            id: 1,
-            name: "Marek",
-            surname: "Kowalski",
-            examPoints: 80
-          },
-          {
-            id: 2,
-            name: "Adam",
-            surname: "Nowak",
-            examPoints: 55
-          }
-        ]}
+        participants={participants}
         onAddParticipant={id => {
-          console.log(`On add participant ${id}`);
+          addParticipant(id);
         }}
       />
     </SampleComponent>
@@ -42,12 +39,25 @@ function ParticipantPickingView(props) {
 
 const mapStateToProps = state => {
   return {
-    user: state.userAuth
+    user: state.userAuth,
+    participants: state.participants
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    getParticipants: () => {
+      dispatch({
+        type: GET_PARTICIPANTS
+      });
+    },
+    addParticipant: id => {
+      dispatch({
+        type: ADD_PARTICIPANT,
+        payload: id
+      });
+    }
+  };
 };
 
 export default connect(

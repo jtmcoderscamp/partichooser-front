@@ -43,6 +43,7 @@ export const ParticipantList = ({ city, participants, onAddParticipant }) => {
           <tbody>
             {participants.map(participant => (
               <ParticipantListItem
+                key={participant.id}
                 participant={participant}
                 onAddParticipant={onAddParticipant}
               />
