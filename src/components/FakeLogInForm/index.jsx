@@ -40,26 +40,29 @@ class FakeLogInForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="inputscontainer">
         <Input
-          placeholder="user name"
+          className="input-hover"
+          placeholder="Name:"
           onChange={this.onUserNameChange.bind(this)}
         />
         <Input
-          placeholder="user surname"
+          className="input-hover"
+          placeholder="Surname:"
           onChange={this.onUserSurnameChange.bind(this)}
         />
         <Input
-          placeholder="user mail"
+          className="input-hover"
+          placeholder="E-mail:"
           onChange={this.onUserMailChange.bind(this)}
         />
         <Button
-          type="primary"
-          block={true}
+          className="modified-item"
+          shape="circle"
+          icon="plus"
+          size="large"
           onClick={this.onLogInButtonClick.bind(this)}
-        >
-          Fake log in!
-        </Button>
+        ></Button>
       </div>
     );
   }

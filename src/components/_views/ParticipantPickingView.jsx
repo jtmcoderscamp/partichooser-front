@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import MentorList from "../SampleComponent";
 import SampleComponent from "../SampleComponent";
 import { withRouter } from "react-router";
 
@@ -9,13 +10,15 @@ import { withRouter } from "react-router";
  */
 function ParticipantPickingView(props) {
   return (
-    <SampleComponent message="This is the view for choosing participants to groups ">
-      <div>
-        {props.user.name
-          ? `You're logged in as "${props.user.name}"`
-          : `You're not logged in`}
-      </div>
-    </SampleComponent>
+    <div className="container">
+      <SampleComponent message="This is the view for choosing participants to groups ">
+        <div>
+          {props.user.name
+            ? `You're logged in as "${props.user.name}"`
+            : `You're not logged in`}
+        </div>
+      </SampleComponent>
+    </div>
   );
 }
 

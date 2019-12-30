@@ -1,0 +1,28 @@
+.mentorcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 1%;
+}
+
+.mentorcontainer > div {
+  padding: 0 0 0 3%;
+}
+
+li.mentorcontainer > div {
+  background-color: #c4c4c4;
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 3%;
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}

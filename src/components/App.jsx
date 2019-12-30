@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginView from "./_views/LoginView";
 import ParticipantPickingView from "./_views/ParticipantPickingView";
 import MentorManagementView from "./_views/MentorManagementView";
+import Header from "./Header";
 
 /**
  * A simple router - not much to navigate as the work on the app has barely even started.
@@ -13,6 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
+        <Header />
         <Switch>
           <Route exact path="/">
             <LoginView />

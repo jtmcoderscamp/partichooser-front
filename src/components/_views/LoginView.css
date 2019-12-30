@@ -3,6 +3,43 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  align-content: center;
   text-align: center;
+}
+.inputscontainer {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ant-input {
+  margin: 2%;
+  border-color: #ffc53d;
+  width: 100%;
+}
+
+.ant-btn {
+  border-color: #ffc53d;
+  color: #ffc53d;
+  outline: none;
+  margin: 3%;
+}
+
+.modified-item:hover {
+  border-color: #f3ad0b !important;
+  color: #f3ad0b !important;
+}
+
+.input-hover:hover {
+  border-color: #f3ad0b !important;
+}
+
+.ant-input:active {
+  border-color: #f3ad0b;
+  outline: none;
+}
+
+.ant-input:focus {
+  border-color: #f3ad0b;
+  box-shadow: none;
 }
