@@ -1,8 +1,11 @@
 import React from "react";
 import "./userForm.css";
 import { Button, Input } from "antd";
+import { connect } from "react-redux";
+import addUserAction from "../../redux/actions/addUserAction";
+import { withRouter } from "react-router";
 
-export default class UserForm extends React.Component {
+class UserForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,16 +30,13 @@ export default class UserForm extends React.Component {
   }
 
   addUserButtonClick() {
-    // this.props.reduxLogIn({
-    //   name: this.state.userName ? this.state.userName : "nameless"
-    //  });
-    //   surname: this.state.userSurname ? this.state.userSurname : "nameless"
-    //  });
-    //  email: this.state.userEmail ? this.state.userEmail : "nameless@email.com"
-    //  });
-    //   testResult: this.state.userTestResult ? this.state.userTestResult : "100"
-    //  });
-    // this.props.history.push("/participants");
+    this.props.reduxLogIn({
+      name: this.state.userName ? this.state.userName : "nameless",
+      surname: this.state.userSurname ? this.state.userSurname : "nameless",
+      email: this.state.userEmail ? this.state.userEmail : "nameless@email.com",
+      testResult: this.state.userTestResult ? this.state.userTestResult : "100"
+    });
+    this.props.history.push("/participants");
   }
 
   render() {
@@ -95,3 +95,21 @@ export default class UserForm extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.userAuth,
+    name: state.userName
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    reduxLogIn: user => dispatch(addUserAction(user))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(UserForm));
