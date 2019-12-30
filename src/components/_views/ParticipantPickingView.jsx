@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import SampleComponent from "../SampleComponent";
+import MentorGroupView from "../MentorGroup";
 import { withRouter } from "react-router";
 
 /**
@@ -10,6 +11,7 @@ import { withRouter } from "react-router";
 function ParticipantPickingView(props) {
   return (
     <SampleComponent message="This is the view for choosing participants to groups ">
+      <MentorGroupView />
       <div>
         {props.user.name
           ? `You're logged in as "${props.user.name}"`

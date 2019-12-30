@@ -1,5 +1,6 @@
 import React from "react";
 import Member from "./Member";
+import "./mentorGroup.css";
 
 export default class ListOfMembers extends React.Component {
   constructor(probs) {
@@ -9,7 +10,11 @@ export default class ListOfMembers extends React.Component {
   render() {
     return (
       <div>
-        <div> Imię i nazwisko Mentora</div>
+        <div className="listOfMembers-component"> My Group </div>
+        <Member />
+        <Member />
+        <Member />
+        <Member />
         <Member />
         <Member />
         <Member />
