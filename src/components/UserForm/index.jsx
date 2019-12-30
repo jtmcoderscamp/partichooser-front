@@ -98,8 +98,10 @@ class UserForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.userAuth,
-    name: state.userName
+    name: state.userName,
+    username: state.userSurname,
+    email: state.userEmail,
+    testResult: state.userTestResult
   };
 };
 
