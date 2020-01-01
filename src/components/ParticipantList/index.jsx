@@ -8,9 +8,9 @@ const Heading = ({ children }) => {
 const ParticipantListItem = ({ participant, onAddParticipant }) => {
   return (
     <tr key={participant.id}>
-      <td>{participant.name}</td>
-      <td>{participant.surname}</td>
-      <td>{participant.examPoints}</td>
+      <td className="dark">{participant.name}</td>
+      <td className="dark">{participant.surname}</td>
+      <td className="dark right">{participant.examPoints}</td>
       <td className="centered">
         <Icon
           onClick={() => onAddParticipant(participant.id)}
@@ -41,9 +41,6 @@ export class ParticipantList extends React.PureComponent {
 
   render() {
     const { city, participants, onAddParticipant } = this.props;
-
-    console.log("this is that", this.state);
-
     return (
       <div
         className="container"
@@ -59,7 +56,7 @@ export class ParticipantList extends React.PureComponent {
               <tr>
                 <th>Name</th>
                 <th>Surname</th>
-                <th>Test result</th>
+                <th className="right">Test result</th>
                 <th width="150" className="centered">
                   Add to my group
                 </th>
