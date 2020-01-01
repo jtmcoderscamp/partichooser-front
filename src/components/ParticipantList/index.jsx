@@ -22,37 +22,65 @@ const ParticipantListItem = ({ participant, onAddParticipant }) => {
   );
 };
 
-export const ParticipantList = ({ city, participants, onAddParticipant }) => {
-  return (
-    <>
-      <div>
-        <Heading>{`All Students (${city})`}</Heading>
+export class ParticipantList extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.containerRef = React.createRef();
+    this.state = {
+      offsetTop: 0
+    };
+  }
+
+  componentDidMount() {
+    const container = this.containerRef && this.containerRef.current;
+    const offsetTop = container.offsetTop;
+    this.setState({
+      offsetTop
+    });
+  }
+
+  render() {
+    const { city, participants, onAddParticipant } = this.props;
+
+    console.log("this is that", this.state);
+
+    return (
+      <div
+        className="container"
+        ref={this.containerRef}
+        style={{ minHeight: `calc(100vh - ${this.state.offsetTop}px)` }}
+      >
+        <div>
+          <Heading>{`All Students (${city})`}</Heading>
+        </div>
+        {participants.length ? (
+          <table className="list">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Test result</th>
+                <th width="150" className="centered">
+                  Add to my group
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {participants.map(participant => (
+                <ParticipantListItem
+                  key={participant.id}
+                  participant={participant}
+                  onAddParticipant={onAddParticipant}
+                />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <span>
+            There is no participants which can be assigned in this city
+          </span>
+        )}
       </div>
-      {participants.length ? (
-        <table className="list">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Surname</th>
-              <th>Test result</th>
-              <th width="150" className="centered">
-                Add to my group
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {participants.map(participant => (
-              <ParticipantListItem
-                key={participant.id}
-                participant={participant}
-                onAddParticipant={onAddParticipant}
-              />
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <span>There is no participants which can be assigned in this city</span>
-      )}
-    </>
-  );
-};
+    );
+  }
+}

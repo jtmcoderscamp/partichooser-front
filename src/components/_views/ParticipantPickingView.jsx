@@ -22,12 +22,12 @@ class ParticipantPickingView extends React.PureComponent {
     const { participants, user, addParticipant } = this.props;
 
     return (
-      <SampleComponent message="This is the view for choosing participants to groups ">
-        <div>
+      <SampleComponent>
+        {/* <div>
           {user.name
             ? `You're logged in as "${user.name}"`
             : `You're not logged in`}
-        </div>
+        </div> */}
         <ParticipantList
           city="Wroclaw"
           participants={participants}
