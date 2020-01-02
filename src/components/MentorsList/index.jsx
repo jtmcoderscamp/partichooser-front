@@ -7,7 +7,8 @@ class MentorsView extends React.Component {
     this.state = {
       mentors: [
         { name: "Patryk", surname: "Kowalski", email: "ok@gmail.com", id: 1 },
-        { name: "Jan", surname: "Kowal", email: "nice@gmail.com", id: 2 }
+        { name: "Jan", surname: "Kowal", email: "nice@gmail.com", id: 2 },
+        { name: "Jan", surname: "Kowal", email: "nice@gmail.com", id: 3 }
       ]
     };
   }
