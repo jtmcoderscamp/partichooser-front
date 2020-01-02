@@ -1,8 +1,8 @@
-import { ADD_USER } from "../actions/addUserAction";
+import { ADD_STUDENT } from "../actions/addStudentAction";
 
-export default function addUser(state = {}, action) {
+export default function addStudent(state = {}, action) {
   switch (action.type) {
-    case ADD_USER:
+    case ADD_STUDENT:
       console.log("Name: " + action.payload.name);
       console.log("Surname: " + action.payload.surname);
       console.log("Email: " + action.payload.email);

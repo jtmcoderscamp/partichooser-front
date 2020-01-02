@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import SampleComponent from "../SampleComponent";
 import { withRouter } from "react-router";
-import UserForm from "../UserForm";
+import StudentForm from "../StudentForm";
 
 /**
  * A relatively simple functional component,
@@ -16,7 +16,7 @@ function ParticipantPickingView(props) {
           ? `You're logged in as "${props.user.name}"`
           : `You're not logged in`}
       </div>
-      <UserForm />
+      <StudentForm />
     </SampleComponent>
   );
 }

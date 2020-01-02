@@ -1,12 +1,13 @@
-.user-form {
+.student-form {
   text-align: center;
-  background-color: #222222;
+  background-color: #c4c4c4;
 }
 h1 {
-  color: white;
-}
-h2 {
-  color: white;
+  text-align: center;
+  margin: 3%;
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
 }
 
 .inputBar {
@@ -23,14 +24,14 @@ h2 {
   text-align: center;
 }
 
-.addUserBtn:hover {
+.addStudentBtn:hover {
   background-color: #ffc53d;
   border-color: #ffc53d;
   color: black;
   transform: scale(1.1);
 }
 
-.addUserBtn {
+.addStudentBtn {
   background-color: #ffc53d;
   border-color: #ffc53d;
   color: black;
