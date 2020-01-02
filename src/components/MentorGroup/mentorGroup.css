@@ -14,7 +14,7 @@
   background-size: cover;
 }
 .mentorGroup-component {
-  width: 30vw;
+  width: 25vw;
   height: 50vw;
 }
 .listOfMembers-component {
@@ -28,8 +28,8 @@
   font-size: 20px;
   color: #000;
   text-align: center;
-  margin: 5px 30px;
+  margin: 5px 2vw 5px 4vw;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }

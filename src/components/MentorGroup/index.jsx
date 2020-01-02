@@ -13,9 +13,6 @@ export default class MentorGroupView extends React.Component {
       <div className="mentorGroup-component">
         <Logo />
         <ListOfMembers />
-
-        {/*
-         */}
       </div>
     );
   }
