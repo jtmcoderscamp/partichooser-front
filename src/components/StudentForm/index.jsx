@@ -33,7 +33,7 @@ class StudentForm extends React.Component {
     this.setState({ studentEmail: e.target.value });
   }
   addstudentCity(e) {
-    this.setState({ studentCity: e.target.value });
+    this.setState({ studentCity: e });
   }
   addstudentTestResult(e) {
     this.setState({ studentTestResult: e.target.value });
@@ -109,7 +109,7 @@ class StudentForm extends React.Component {
           <Select
             defaultValue="Wroclaw"
             style={{ width: "100%" }}
-            onChange={this.addstudentCity.bind(this)}
+            onChange={value => this.addstudentCity(value)}
           >
             <Option value="Wroclaw">Wrocław</Option>
             <Option value="Warszawa">Warszawa</Option>
