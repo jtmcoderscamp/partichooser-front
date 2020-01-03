@@ -7,7 +7,10 @@ export default function(student) {
       name: student.name,
       surname: student.surname,
       email: student.email,
-      testResult: student.testResult
+      testResult: student.testResult,
+      city: student.city,
+      description: student.description,
+      mentor: student.mentor
     }
   };
 }

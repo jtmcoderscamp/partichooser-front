@@ -1,9 +1,11 @@
 import React from "react";
 import "./studentForm.css";
-import { Button, Input } from "antd";
+import { Button, Input, Select } from "antd";
 import { connect } from "react-redux";
 import addStudentAction from "../../redux/actions/addStudentAction";
 import { withRouter } from "react-router";
+import TextArea from "antd/lib/input/TextArea";
+const { Option } = Select;
 
 class StudentForm extends React.Component {
   constructor(props) {
@@ -12,7 +14,12 @@ class StudentForm extends React.Component {
       studentName: "",
       studentSurname: "",
       studentEmail: "",
-      studentTestResult: ""
+      studentTestResult: "",
+      studentCity: "",
+      studentDescription: "",
+      studentMentor: "",
+      loading: false,
+      iconLoading: false
     };
   }
 
@@ -25,12 +32,28 @@ class StudentForm extends React.Component {
   addstudentEmail(e) {
     this.setState({ studentEmail: e.target.value });
   }
+  addstudentCity(e) {
+    this.setState({ studentCity: e.target.value });
+  }
   addstudentTestResult(e) {
     this.setState({ studentTestResult: e.target.value });
   }
+  addstudentDescription(e) {
+    this.setState({ studentDescription: e.target.value });
+  }
+  addstudentMentor(e) {
+    this.setState({ studentMentor: e.target.value });
+  }
+  enterLoading = () => {
+    this.setState({ loading: true });
+  };
+  enterIconLoading = () => {
+    this.setState({ iconLoading: true });
+  };
 
   addstudentButtonClick() {
-    this.props.reduxLogIn({
+    this.enterIconLoading();
+    this.props.reduxStudentForm({
       name: this.state.studentName ? this.state.studentName : "nameless",
       surname: this.state.studentSurname
         ? this.state.studentSurname
@@ -40,7 +63,12 @@ class StudentForm extends React.Component {
         : "nameless@email.com",
       testResult: this.state.studentTestResult
         ? this.state.studentTestResult
-        : "100"
+        : "100",
+      city: this.state.studentCity ? this.state.studentCity : "Wroclaw",
+      mentor: this.state.studentMentor ? this.state.studentMentor : "Mentor",
+      description: this.state.studentDescription
+        ? this.state.studentDescription
+        : "Description"
     });
     this.props.history.push("/participants");
   }
@@ -77,11 +105,47 @@ class StudentForm extends React.Component {
         </div>
 
         <div className="inputBar">
-          <h2>Test results</h2>
+          <h2>City</h2>
+          <Select
+            defaultValue="Wroclaw"
+            style={{ width: "100%" }}
+            onChange={this.addstudentCity.bind(this)}
+          >
+            <Option value="Wroclaw">Wrocław</Option>
+            <Option value="Warszawa">Warszawa</Option>
+            <Option value="Zabrze">Zabrze</Option>
+            <Option value="Krakow">Kraków</Option>
+            <Option value="Poznan">Poznań</Option>
+            <Option value="Gdansk">Gdańsk</Option>
+            <Option value="Szczecin">Szczecin</Option>
+          </Select>
+        </div>
+
+        <div className="inputBar">
+          <h2>Description</h2>
+          <TextArea
+            className="inp"
+            placeholder="Student description"
+            onChange={this.addstudentDescription.bind(this)}
+            autoSize
+          ></TextArea>
+        </div>
+
+        <div className="inputBar">
+          <h2>Qualifying test results</h2>
           <Input
             className="inp"
-            placeholder="Test results"
+            placeholder="Qualifying test results"
             onChange={this.addstudentTestResult.bind(this)}
+          ></Input>
+        </div>
+
+        <div className="inputBar">
+          <h2>Mentor preference</h2>
+          <Input
+            className="inp"
+            placeholder="Input mentor name"
+            onChange={this.addstudentMentor.bind(this)}
           ></Input>
         </div>
 
@@ -92,6 +156,7 @@ class StudentForm extends React.Component {
             shape="round"
             icon="plus"
             block={true}
+            loading={this.state.iconLoading}
             onClick={this.addstudentButtonClick.bind(this)}
           >
             Add student
@@ -107,13 +172,16 @@ const mapStateToProps = state => {
     name: state.studentName,
     studentname: state.studentSurname,
     email: state.studentEmail,
-    testResult: state.studentTestResult
+    testResult: state.studentTestResult,
+    city: state.studentCity,
+    mentor: state.studentMentor,
+    description: state.studentDescription
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    reduxLogIn: student => dispatch(addStudentAction(student))
+    reduxStudentForm: student => dispatch(addStudentAction(student))
   };
 };
 
