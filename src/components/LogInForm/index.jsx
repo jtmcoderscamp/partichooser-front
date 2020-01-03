@@ -1,6 +1,6 @@
 import React from "react";
 import "./logInForm.css";
-import Form from "./form";
+import LoginForm from "./form";
 
 export default class LogIn extends React.Component {
   render() {
@@ -11,7 +11,7 @@ export default class LogIn extends React.Component {
             <div className="col-xs-12 col-sm-5 logo"></div>
 
             <div className="col-xs-12 col-sm-7 login-main">
-              <Form />
+              <LoginForm />
             </div>
           </div>
         </div>

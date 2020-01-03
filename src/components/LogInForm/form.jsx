@@ -1,16 +1,16 @@
 import React from "react";
 import "./logInForm.css";
 
-export default class Form extends React.Component {
+export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      password: "",
       email: "",
-      nameError: "",
+      passwordError: "",
       emailError: "",
       send: false,
-      errors: []
+      error: ""
     };
   }
 
@@ -29,19 +29,22 @@ export default class Form extends React.Component {
   }
 
   validate() {
-    let nameError = "";
+    let passwordError = "";
     let emailError = "";
     let errors = [];
 
-    if (this.state.name.length < 2 && this.state.name.indexOf(" ") === -1) {
-      nameError = "Your login is not correct!";
-      errors.push(nameError);
+    if (
+      this.state.password.length < 2 &&
+      this.state.password.indexOf(" ") === -1
+    ) {
+      passwordError = "Your password is not correct!";
+      errors.push(passwordError);
     }
-    if (this.state.email.length < 3 && this.state.email.indexOf("@") === -1) {
+    if (this.state.email.length < 3 || this.state.email.indexOf("@") === -1) {
       emailError = "Your email is not correct!";
       errors.push(emailError);
     }
-    this.setState({ nameError, emailError });
+    this.setState({ passwordError, emailError });
     console.log(errors);
     return errors.length === 0;
   }
@@ -51,29 +54,6 @@ export default class Form extends React.Component {
       <form onSubmit={e => this.handleSubmit(e)}>
         <div>
           <div className="login-form">
-            <div className="name">
-              <label>
-                <span>Your login</span>
-                <br />
-                <input
-                  className={
-                    this.state.nameError
-                      ? "inputWithError"
-                      : "inputWithoutError"
-                  }
-                  type="text"
-                  placeholder="Teresa"
-                  name="name"
-                  value={this.state.name}
-                  onChange={e => this.handleChange(e)}
-                />
-                <br />
-              </label>
-              <div className="errors-form contact-form">
-                {this.state.nameError}
-              </div>
-            </div>
-
             <div className="email">
               <label>
                 <span>Your email</span>
@@ -94,6 +74,28 @@ export default class Form extends React.Component {
               </label>
               <div className="errors-form contact-form">
                 {this.state.emailError}
+              </div>
+            </div>
+
+            <div className="name">
+              <label>
+                <span>Your password</span>
+                <br />
+                <input
+                  className={
+                    this.state.passwordError
+                      ? "inputWithError"
+                      : "inputWithoutError"
+                  }
+                  type="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={e => this.handleChange(e)}
+                />
+                <br />
+              </label>
+              <div className="errors-form contact-form">
+                {this.state.passwordError}
               </div>
             </div>
           </div>
