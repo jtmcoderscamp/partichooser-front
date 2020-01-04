@@ -1,8 +1,8 @@
 import React from "react";
 import "./logInForm.css";
-import LoginForm from "./form";
+import LogInFormContents from "./form";
 
-export default class LogIn extends React.Component {
+export default class LogInForm extends React.Component {
   render() {
     return (
       <div className="wrapper-image image-cover">
@@ -11,7 +11,7 @@ export default class LogIn extends React.Component {
             <div className="col-xs-12 col-sm-5 logo"></div>
 
             <div className="col-xs-12 col-sm-7 login-main">
-              <LoginForm />
+              <LogInFormContents />
             </div>
           </div>
         </div>
