@@ -5,19 +5,21 @@ import { connect } from "react-redux";
 import addStudentAction from "../../redux/actions/addStudentAction";
 import { withRouter } from "react-router";
 import TextArea from "antd/lib/input/TextArea";
+import axios from "axios";
 const { Option } = Select;
 
 class StudentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      studentName: "",
-      studentSurname: "",
-      studentEmail: "",
-      studentTestResult: "",
-      studentCity: "",
-      studentDescription: "",
-      studentMentor: "",
+      //default Values
+      studentName: "Name",
+      studentSurname: "Surname",
+      studentEmail: "example@gmail.com",
+      studentTestResult: 100,
+      studentCity: "Wroclaw",
+      studentDescription: ["Description"],
+      studentMentor: "Mentor",
       loading: false,
       iconLoading: false
     };
@@ -39,7 +41,7 @@ class StudentForm extends React.Component {
     this.setState({ studentTestResult: e.target.value });
   }
   addstudentDescription(e) {
-    this.setState({ studentDescription: e.target.value });
+    this.setState({ studentDescription: [e.target.value] });
   }
   addstudentMentor(e) {
     this.setState({ studentMentor: e.target.value });
@@ -53,7 +55,7 @@ class StudentForm extends React.Component {
 
   addstudentButtonClick() {
     this.enterIconLoading();
-    this.props.reduxStudentForm({
+    /* this.props.reduxStudentForm({
       name: this.state.studentName ? this.state.studentName : "nameless",
       surname: this.state.studentSurname
         ? this.state.studentSurname
@@ -71,6 +73,32 @@ class StudentForm extends React.Component {
         : "Description"
     });
     this.props.history.push("/participants");
+*/
+    axios
+      .post("https://ptc-test-participants.herokuapp.com/api/participants", {
+        name: this.state.studentName,
+        surname: this.state.studentSurname,
+        city: this.state.studentCity,
+        email: this.state.studentEmail,
+        qualifyingPoints: this.state.studentTestResult,
+        description: this.state.studentDescription,
+        mentorPreferences: this.state.studentMentor
+      })
+      .then(response => {
+        console.log(response);
+        alert("Student added to database");
+        this.setState({
+          loading: false,
+          iconLoading: false
+        });
+      })
+      .catch(error => {
+        alert(error.response.data);
+        this.setState({
+          loading: false,
+          iconLoading: false
+        });
+      });
   }
 
   render() {
