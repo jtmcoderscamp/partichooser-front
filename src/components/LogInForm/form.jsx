@@ -107,7 +107,11 @@ class LogInFormContents extends React.Component {
           </div>
 
           <div>
-            <button className="btn" type="submit">
+            <button
+              className="btn"
+              type="submit"
+              disabled={this.props.auth.status === "pending"}
+            >
               Log in
             </button>
           </div>

@@ -1,5 +1,6 @@
 import "antd/dist/antd.css";
 import React from "react";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginView from "./_views/LoginView";
 import ParticipantPickingView from "./_views/ParticipantPickingView";
@@ -9,7 +10,7 @@ import MentorManagementView from "./_views/MentorManagementView";
  * A simple router - not much to navigate as the work on the app has barely even started.
  * But when some views are really created, we'll be using this more
  */
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Router>
@@ -17,23 +18,36 @@ export default class App extends React.Component {
           See how this part doesn't change at all
           <br />
           <Link to="/">HOME</Link>
+          <br />
+          <Link to="/mentors">Mentor management</Link>
         </div>
 
         <Switch>
-          <Route exact path="/">
-            <LoginView />
-          </Route>
-          <Route path="/login">
-            <LoginView />
-          </Route>
           <Route path="/participants">
-            <ParticipantPickingView />
+            {this._authProtect(<ParticipantPickingView />)}
           </Route>
           <Route path="/mentors">
-            <MentorManagementView />
+            {this._authProtect(<MentorManagementView />)}
+          </Route>
+          <Route path="/">
+            {this._authProtect(<ParticipantPickingView />)}
           </Route>
         </Switch>
       </Router>
     );
   }
+
+  _authProtect(view) {
+    if (this.props.logInStatus && this.props.logInStatus === "success") {
+      return view;
+    } else return <LoginView />;
+  }
 }
+
+const mapStateToProps = state => {
+  return {
+    logInStatus: state.userAuth.status
+  };
+};
+
+export default connect(mapStateToProps)(App);

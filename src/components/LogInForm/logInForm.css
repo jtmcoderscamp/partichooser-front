@@ -364,6 +364,10 @@ body {
   background-color: rgb(252, 182, 20);
 }
 
+.btn:disabled {
+  filter: grayscale(50%) contrast(80%) opacity(80%);
+}
+
 .inputWithoutError {
   background-color: transparent;
   border-color: gray;
