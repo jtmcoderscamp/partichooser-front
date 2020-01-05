@@ -1,7 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+import logIn from "../../redux/actions/logIn";
+import { withRouter } from "react-router";
 import "./logInForm.css";
 
-export default class LogInFormContents extends React.Component {
+class LogInFormContents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +27,10 @@ export default class LogInFormContents extends React.Component {
     e.preventDefault();
 
     if (this.validate()) {
-      this.setState({ send: true });
+      this.props.reduxLogIn({
+        email: this.state.email,
+        password: this.state.password
+      });
     }
   }
 
@@ -65,7 +71,7 @@ export default class LogInFormContents extends React.Component {
                       : "inputWithoutError"
                   }
                   type="email"
-                  placeholder="teresa@coderscamp.pl"
+                  placeholder="email@coderscamp.pl"
                   name="email"
                   value={this.state.email}
                   onChange={e => this.handleChange(e)}
@@ -109,6 +115,29 @@ export default class LogInFormContents extends React.Component {
       </form>
     );
 
-    return <>{this.state.send ? <>Welcome User :)</> : form}</>;
+    return (
+      <>
+        {this.props.auth.status === "success"
+          ? JSON.stringify(this.props.auth, null, 2)
+          : form}
+      </>
+    );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.userAuth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    reduxLogIn: authData => dispatch(logIn(authData))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(LogInFormContents));
