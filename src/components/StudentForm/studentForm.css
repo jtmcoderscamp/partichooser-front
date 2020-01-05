@@ -1,0 +1,46 @@
+.student-form {
+  text-align: center;
+  background-color: #c4c4c4;
+}
+h1 {
+  text-align: center;
+  margin: 3%;
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
+}
+
+.inputBar {
+  margin: 20px auto;
+  width: 60%;
+  border-color: #ffc53d;
+}
+
+.inp {
+  border-color: #ffc53d;
+}
+
+.btn {
+  text-align: center;
+  background-color: #c4c4c4;
+}
+.btn:hover {
+  text-align: center;
+  background-color: #c4c4c4;
+}
+
+.addStudentBtn:hover {
+  background-color: #ffc53d;
+  border-color: #ffc53d;
+  color: black;
+  transform: scale(1.1);
+}
+
+.addStudentBtn {
+  background-color: #ffc53d;
+  border-color: #ffc53d;
+  color: black;
+  width: auto;
+  margin: 10px;
+  transition: all 0, 3s;
+}
