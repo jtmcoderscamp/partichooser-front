@@ -3,10 +3,14 @@ import thunkMiddleware from "redux-thunk";
 
 //Import reducers
 import userAuth from "./reducers/userAuth";
+import listMentorGroup from "./reducers/listMentorGroup";
+import removeGroupMember from "./reducers/removeGroupMember";
 
 //Set up combined reducer
 const rootReducer = combineReducers({
-  userAuth
+  userAuth,
+  listMentorGroup,
+  removeGroupMember
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
