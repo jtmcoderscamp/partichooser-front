@@ -1,25 +1,27 @@
 import React from "react";
 import "./studentForm.css";
 import { Button, Input, Select } from "antd";
+/*
 import { connect } from "react-redux";
 import addStudentAction from "../../redux/actions/addStudentAction";
 import { withRouter } from "react-router";
+*/
 import TextArea from "antd/lib/input/TextArea";
 import axios from "axios";
 const { Option } = Select;
 
-class StudentForm extends React.Component {
+export default class StudentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       //default Values
-      studentName: "Name",
-      studentSurname: "Surname",
-      studentEmail: "example@gmail.com",
-      studentTestResult: 100,
-      studentCity: "Wroclaw",
-      studentDescription: ["Description"],
-      studentMentor: "Mentor",
+      studentName: "",
+      studentSurname: "",
+      studentEmail: "",
+      studentTestResult: "",
+      studentCity: "",
+      studentDescription: ["Without description"],
+      studentMentor: "Without preference",
       loading: false,
       iconLoading: false
     };
@@ -93,7 +95,21 @@ class StudentForm extends React.Component {
         });
       })
       .catch(error => {
-        alert(error.response.data);
+        this.state.studentName
+          ? alert(error.response.data)
+          : alert("Please add student Name.");
+        this.state.studentSurname
+          ? alert(error.response.data)
+          : alert("Please add student Surname.");
+        this.state.studentEmail
+          ? alert(error.response.data)
+          : alert("Please add student Email.");
+        this.state.studentCity
+          ? alert(error.response.data)
+          : alert("Please add student Name.");
+        this.state.studentTestResult
+          ? alert(error.response.data)
+          : alert("Please add student qualifying test result.");
         this.setState({
           loading: false,
           iconLoading: false
@@ -135,10 +151,11 @@ class StudentForm extends React.Component {
         <div className="inputBar">
           <h2>City</h2>
           <Select
-            defaultValue="Wroclaw"
+            defaultValue=" "
             style={{ width: "100%" }}
             onChange={value => this.addstudentCity(value)}
           >
+            <Option value=" "></Option>
             <Option value="Wroclaw">Wrocław</Option>
             <Option value="Warszawa">Warszawa</Option>
             <Option value="Zabrze">Zabrze</Option>
@@ -194,7 +211,7 @@ class StudentForm extends React.Component {
     );
   }
 }
-
+/*
 const mapStateToProps = state => {
   return {
     name: state.studentName,
@@ -217,3 +234,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(StudentForm));
+*/
