@@ -1,16 +1,29 @@
 .menu {
   display: flex;
-  height: 7vh;
+  height: 10vh;
   width: 100vw;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: center;
-  border: solid black;
 }
 
-.menu .button {
-  margin: auto 10px;
+.menu .buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.menu .buttons .button {
+  box-sizing: border-box;
+  margin-right: 10px;
 }
 
 .menu .ikona {
-  margin-right: 70%;
+  margin-left: 5%;
+}
+
+.menu img {
+  min-width: 20px;
+  min-height: 20px;
+  width: 40px;
+  height: 40px;
 }
