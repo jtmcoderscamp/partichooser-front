@@ -51,6 +51,7 @@ async function _makeLogInCall(logInData) {
 
   return {
     token: response.headers.get("x-auth-token"),
+    uuid: data.uuid,
     email: data.email,
     name: data.name,
     surname: data.surname,
@@ -69,16 +70,18 @@ export function attemptLogIn() {
 
 /**
  * Action dispatched on successful log-in
- * @param {string} token
- * @param {string} email
- * @param {string} name
- * @param {string} surname
- * @param {string[]} roles
+ * @param {Object} userDetails
+ * @param {string} userDetails.token
+ * @param {string} userDetails.uuid
+ * @param {string} userDetails.email
+ * @param {string} userDetails.name
+ * @param {string} userDetails.surname
+ * @param {string[]} userDetails.roles
  */
-export function completeLogIn(token, email, name, surname, roles) {
+export function completeLogIn({ token, uuid, email, name, surname, roles }) {
   return {
     type: COMPLETE_LOG_IN,
-    payload: { token, email, name, surname, roles }
+    payload: { token, uuid, email, name, surname, roles }
   };
 }
 
