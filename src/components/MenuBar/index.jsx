@@ -27,19 +27,15 @@ export default class MenuBar extends React.Component {
     return (
       <div className="menu">
         <div className="ikona">
-          {" "}
-          <img src="/src/components/MenuBar/cc.jpg" alt="logo"></img>{" "}
+          <img src={require("./cc.jpg")} alt="logo"></img>
         </div>
         <div className="buttons">
           <Menu mode="horizontal">
             {this.props.children}
             <SubMenu title="Change city">
-              <Menu.Item>{list[0]}</Menu.Item>
-              <Menu.Item>{list[1]}</Menu.Item>
-              <Menu.Item>{list[2]}</Menu.Item>
-              <Menu.Item>{list[3]}</Menu.Item>
-              <Menu.Item>{list[4]}</Menu.Item>
-              <Menu.Item>{list[5]}</Menu.Item>
+              {list.map(element => {
+                return <Menu.Item>{element}</Menu.Item>;
+              })}
             </SubMenu>
             <Menu.Item>Log out</Menu.Item>
           </Menu>
