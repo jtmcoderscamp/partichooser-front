@@ -9,7 +9,7 @@ export default class MenuBar extends React.Component {
     //this.state
   }
 
-  createListOfCities(currentcity = "Wrocław") {
+  createListOfCities(currentcity = "X") {
     const list = [
       "Kraków",
       "Warszawa",
@@ -23,6 +23,7 @@ export default class MenuBar extends React.Component {
   }
 
   render() {
+    //if you pass the current city it won't appear
     const list = this.createListOfCities();
     return (
       <div className="menu">
