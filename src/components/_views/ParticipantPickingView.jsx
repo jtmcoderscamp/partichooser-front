@@ -4,8 +4,8 @@ import SampleComponent from "../SampleComponent";
 import { withRouter } from "react-router";
 import { ParticipantList } from "../ParticipantList";
 import {
-  ADD_PARTICIPANT,
-  GET_PARTICIPANTS
+  getParticipants,
+  addParticipant
 } from "../../redux/actions/participants";
 
 /**
@@ -14,25 +14,28 @@ import {
  */
 class ParticipantPickingView extends React.PureComponent {
   componentDidMount() {
+    const { user } = this.props;
+    const userId = user.uuid;
     const { getParticipants } = this.props;
-    getParticipants();
+    getParticipants(userId);
   }
 
   render() {
     const { participants, user, addParticipant } = this.props;
+    const userId = user.uuid;
 
     return (
       <SampleComponent>
-        {/* <div>
+        <div>
           {user.name
             ? `You're logged in as "${user.name}"`
             : `You're not logged in`}
-        </div> */}
+        </div>
         <ParticipantList
           city="Wroclaw"
           participants={participants}
           onAddParticipant={id => {
-            addParticipant(id);
+            addParticipant(id, userId);
           }}
         />
       </SampleComponent>
@@ -49,17 +52,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getParticipants: () => {
-      dispatch({
-        type: GET_PARTICIPANTS
-      });
-    },
-    addParticipant: id => {
-      dispatch({
-        type: ADD_PARTICIPANT,
-        payload: id
-      });
-    }
+    getParticipants: userId => getParticipants(dispatch, userId),
+    addParticipant: (userId, participantId) =>
+      addParticipant(dispatch, userId, participantId)
   };
 };
 

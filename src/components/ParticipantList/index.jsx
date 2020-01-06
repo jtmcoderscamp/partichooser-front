@@ -7,13 +7,13 @@ const Heading = ({ children }) => {
 };
 const ParticipantListItem = ({ participant, onAddParticipant }) => {
   return (
-    <tr key={participant.id}>
+    <tr>
       <td className="dark">{participant.name}</td>
       <td className="dark">{participant.surname}</td>
-      <td className="dark right">{participant.examPoints}</td>
+      <td className="dark right">{participant.qualifyingPoints}</td>
       <td className="centered">
         <Icon
-          onClick={() => onAddParticipant(participant.id)}
+          onClick={() => onAddParticipant(participant.uuid)}
           type="plus"
           className="action"
         />
@@ -65,7 +65,7 @@ export class ParticipantList extends React.PureComponent {
             <tbody>
               {participants.map(participant => (
                 <ParticipantListItem
-                  key={participant.id}
+                  key={participant.uuid}
                   participant={participant}
                   onAddParticipant={onAddParticipant}
                 />
