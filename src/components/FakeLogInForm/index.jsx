@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, Input } from "antd";
 import logInButFake from "../../redux/actions/logInButFake";
 import { withRouter } from "react-router";
+import { Alert } from "reactstrap";
 
 /**
  * Fake form for signing in - no backend, not even a password field.
@@ -15,7 +16,8 @@ class FakeLogInForm extends React.Component {
     this.state = {
       userName: "",
       userSurname: "",
-      userMail: ""
+      userMail: "",
+      shouldAlert: false
     };
   }
 
@@ -32,10 +34,18 @@ class FakeLogInForm extends React.Component {
   }
 
   onLogInButtonClick() {
-    this.props.reduxLogIn({
-      name: this.state.userName ? this.state.userName : "nameless"
-    });
-    this.props.history.push("/participants");
+    if (
+      this.state.userName !== "" &&
+      this.state.userSurname !== "" &&
+      this.state.userMail !== ""
+    ) {
+      this.props.history.push("/mentors");
+    } else {
+      return this.setState({ shouldAlert: true });
+    }
+  }
+  componentDidUpdate() {
+    console.log("updated");
   }
 
   render() {
@@ -63,6 +73,9 @@ class FakeLogInForm extends React.Component {
           size="large"
           onClick={this.onLogInButtonClick.bind(this)}
         ></Button>
+        {this.state.shouldAlert ? (
+          <Alert color="warning">You have to fill the data!</Alert>
+        ) : null}
       </div>
     );
   }

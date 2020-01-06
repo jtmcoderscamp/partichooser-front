@@ -1,16 +1,21 @@
+import axios from "axios";
 import React, { Component } from "react";
 import "./MentorsList.css";
 
 class MentorsView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mentors: [
-        { name: "Patryk", surname: "Kowalski", email: "ok@gmail.com", id: 1 },
-        { name: "Jan", surname: "Kowal", email: "nice@gmail.com", id: 2 },
-        { name: "Jan", surname: "Kowal", email: "nice@gmail.com", id: 3 }
-      ]
-    };
+  state = {
+    mentors: []
+  };
+  componentDidMount() {
+    axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://ptc-test-users.herokuapp.com/users"
+      )
+      .then(res => {
+        const mentors = res.data;
+        this.setState({ mentors });
+        console.log(mentors);
+      });
   }
 
   render() {
@@ -28,7 +33,7 @@ class MentorsView extends React.Component {
           </div>
           {this.state.mentors.map(mentor => {
             return (
-              <li className="mentorcontainer" key={mentor.id}>
+              <li className="mentorcontainer" key={mentor.uuid}>
                 <div>{mentor.name}</div>
                 <div>{mentor.surname}</div>
                 <div>{mentor.email}</div>
