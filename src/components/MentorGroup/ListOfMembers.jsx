@@ -1,31 +1,63 @@
 import React from "react";
-import Member from "./Member";
+import { connect } from "react-redux";
+import { Icon } from "antd";
 import "./mentorGroup.css";
+import { fetchStudentA } from "../../redux/actions/fetchStudent";
+import mentorGroup from "../../redux/actions/mentorGroup";
+// import removeGroupMemberA from "../../redux/actions/removeGroupMemberA";
 
-export default class ListOfMembers extends React.Component {
-  constructor(probs) {
-    super(probs);
-    this.state = { members: [] };
-  }
+import { withRouter } from "react-router";
+
+class ListOfMembers extends React.Component {
   componentDidMount() {
+    this.props.fetchStudentA();
+    //this.props.mentorGroup('aaaa');
     this.setState({
-      members: [
-        { ID: 1, name: "Joe", surname: "Smith" },
-        { ID: 2, name: "Alex", surname: "Power" },
-        { ID: 3, name: "John", surname: "Jones" },
-        { ID: 4, name: "Sue", surname: "Smithy" },
-        { ID: 5, name: "Eve", surname: "Nowak" },
-        { ID: 6, name: "Joy", surname: "Abc" }
-      ]
+      members: this.props.members.data
+    });
+    console.log("set state", this.props);
+  }
+
+  renderList() {
+    return this.props.members.map(member => {
+      return (
+        <div className="member-component" key={member.uuid}>
+          <div>
+            {member.name} {member.surname}
+          </div>
+          <div>
+            {/*onClick={this.onDivCLick}*/}
+            <Icon type="minus-circle" style={{ color: " rgb(252, 212, 33)" }} />
+          </div>
+        </div>
+      );
     });
   }
 
   render() {
+    console.log("props   !!!!!!!!!!    ", this.props);
     return (
       <div>
         <div className="listOfMembers-component"> My Group </div>
-        <Member members={this.state.members} />
+        <div> {this.renderList()}</div>
       </div>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.userAuth,
+    students: state.listMentorGroup,
+    members: state.fetchStudent
+  };
+};
+
+const mapDispatchToProps = {
+  fetchStudentA,
+  mentorGroup
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ListOfMembers));
