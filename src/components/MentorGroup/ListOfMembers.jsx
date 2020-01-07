@@ -10,32 +10,43 @@ import { withRouter } from "react-router";
 
 class ListOfMembers extends React.Component {
   componentDidMount() {
-    this.props.fetchStudentA();
-    //this.props.mentorGroup('aaaa');
-    this.setState({
-      members: this.props.members.data
-    });
-    console.log("set state", this.props);
+    this.props
+      .fetchStudentA()
+      .then(() => this.props.mentorGroup(this.props.user, this.props.students))
+      .catch(err => console.log("Error", err));
   }
 
   renderList() {
-    return this.props.members.map(member => {
-      return (
-        <div className="member-component" key={member.uuid}>
-          <div>
-            {member.name} {member.surname}
+    if (
+      this.props.members.length === 0 ||
+      (Object.keys(this.props.members).length === 0 &&
+        this.props.members.constructor === Object)
+    )
+      return <div>You're not logged in</div>;
+    else {
+      return this.props.members.map(member => {
+        return (
+          <div className="member-component" key={member.uuid}>
+            <div>
+              {member.name} {member.surname}
+            </div>
+            <div>
+              {/*onClick={this.onDivCLick}*/}
+              <Icon
+                type="minus-circle"
+                style={{ color: " rgb(252, 212, 33)" }}
+              />
+            </div>
           </div>
-          <div>
-            {/*onClick={this.onDivCLick}*/}
-            <Icon type="minus-circle" style={{ color: " rgb(252, 212, 33)" }} />
-          </div>
-        </div>
-      );
-    });
+        );
+      });
+    }
   }
 
   render() {
+    if (this.props.members === {}) console.log("obiekttttttt");
     console.log("props   !!!!!!!!!!    ", this.props);
+    console.log("member ", this.props.members);
     return (
       <div>
         <div className="listOfMembers-component"> My Group </div>
@@ -47,8 +58,8 @@ class ListOfMembers extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.userAuth,
-    students: state.listMentorGroup,
-    members: state.fetchStudent
+    members: state.listMentorGroup,
+    students: state.fetchStudent
   };
 };
 
