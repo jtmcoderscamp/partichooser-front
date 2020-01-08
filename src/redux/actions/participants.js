@@ -1,5 +1,6 @@
 export const ADD_PARTICIPANT_TO_MENTOR = "ADD_PARTICIPANT_TO_MENTOR";
 export const GET_PARTICIPANTS = "GET_PARTICIPANTS";
+export const LOAD_NEW_PARTICIPANTS = "LOAD_NEW_PARTICIPANTS";
 
 async function _getParticipants(userId) {
   const response = await fetch(
@@ -42,6 +43,9 @@ async function _addParticipant(userId, participantId) {
 }
 
 export async function getParticipants(dispatch, userId) {
+  dispatch({
+    type: LOAD_NEW_PARTICIPANTS
+  });
   _getParticipants(userId)
     .then(data => {
       dispatch({

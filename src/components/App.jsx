@@ -30,7 +30,8 @@ class App extends React.Component {
             {this._authProtect(<MentorManagementView />)}
           </Route>
           <Route path="/">
-            {this._authProtect(<ParticipantPickingView />)}
+            <ParticipantPickingView />
+            {/* {this._authProtect(<ParticipantPickingView />)} */}
           </Route>
         </Switch>
       </Router>

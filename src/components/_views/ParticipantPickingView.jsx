@@ -7,6 +7,7 @@ import {
   getParticipants,
   addParticipant
 } from "../../redux/actions/participants";
+import Loader from "../Loader/index";
 
 /**
  * A relatively simple functional component,
@@ -31,13 +32,17 @@ class ParticipantPickingView extends React.PureComponent {
             ? `You're logged in as "${user.name}"`
             : `You're not logged in`}
         </div>
-        <ParticipantList
-          city="Wroclaw"
-          participants={participants}
-          onAddParticipant={id => {
-            addParticipant(id, userId);
-          }}
-        />
+        {participants.loading ? (
+          <Loader />
+        ) : (
+          <ParticipantList
+            city="Wroclaw"
+            participants={participants}
+            onAddParticipant={id => {
+              addParticipant(id, userId);
+            }}
+          />
+        )}
       </SampleComponent>
     );
   }
