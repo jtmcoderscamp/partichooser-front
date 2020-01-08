@@ -1,16 +1,20 @@
-import { ADD_STUDENT } from "../actions/addStudentAction";
-
+import {
+  ATTEMPT_ADD_STUDENT,
+  FAIL_ADD_STUDENT,
+  COMPLETE_ADD_STUDENT
+} from "../actions/addStudentAction";
+//Similar to the user auth
 export default function addStudent(state = {}, action) {
   switch (action.type) {
-    case ADD_STUDENT:
-      console.log("Name: " + action.payload.name);
-      console.log("Surname: " + action.payload.surname);
-      console.log("Email: " + action.payload.email);
-      console.log("Test Result: " + action.payload.testResult);
-      console.log("City: " + action.payload.city);
-      console.log("Description: " + action.payload.description);
-      console.log("Mentor: " + action.payload.mentor);
-      return { ...action.payload };
+    case ATTEMPT_ADD_STUDENT:
+      console.log("attempting add-student");
+      return { status: "pending" };
+    case FAIL_ADD_STUDENT:
+      console.log("add-student failed: ", action.payload);
+      return { status: "failed" };
+    case COMPLETE_ADD_STUDENT:
+      console.log("add-student successful");
+      return { status: "success", ...action.payload };
     default:
       return state;
   }

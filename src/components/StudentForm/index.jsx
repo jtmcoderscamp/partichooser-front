@@ -1,53 +1,48 @@
 import React from "react";
 import "./studentForm.css";
 import { Button, Input, Select } from "antd";
-/*
 import { connect } from "react-redux";
 import addStudentAction from "../../redux/actions/addStudentAction";
 import { withRouter } from "react-router";
-*/
 import TextArea from "antd/lib/input/TextArea";
 import axios from "axios";
 const { Option } = Select;
 
-export default class StudentForm extends React.Component {
+class StudentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //default Values
       studentName: "",
       studentSurname: "",
       studentEmail: "",
       studentTestResult: "",
       studentCity: "",
-      studentDescription: ["Without description"],
-      studentMentor: "Without preference",
+      studentDescription: ["Without Description."],
+      studentMentor: "Without mentor preference.",
       loading: false,
-      iconLoading: false
+      iconLoading: false,
+
+      studentNameError: "",
+      studentSurnameError: "",
+      studentEmailError: "",
+      studentTestResultError: "",
+      studentCityError: "",
+
+      send: false,
+      error: ""
     };
   }
 
-  addstudentName(e) {
-    this.setState({ studentName: e.target.value });
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.val
+    });
   }
-  addstudentSurname(e) {
-    this.setState({ studentSurname: e.target.value });
-  }
-  addstudentEmail(e) {
-    this.setState({ studentEmail: e.target.value });
-  }
+
   addstudentCity(e) {
     this.setState({ studentCity: e });
   }
-  addstudentTestResult(e) {
-    this.setState({ studentTestResult: e.target.value });
-  }
-  addstudentDescription(e) {
-    this.setState({ studentDescription: [e.target.value] });
-  }
-  addstudentMentor(e) {
-    this.setState({ studentMentor: e.target.value });
-  }
+
   enterLoading = () => {
     this.setState({ loading: true });
   };
@@ -57,25 +52,23 @@ export default class StudentForm extends React.Component {
 
   addstudentButtonClick() {
     this.enterIconLoading();
-    /* this.props.reduxStudentForm({
-      name: this.state.studentName ? this.state.studentName : "nameless",
-      surname: this.state.studentSurname
-        ? this.state.studentSurname
-        : "nameless",
-      email: this.state.studentEmail
-        ? this.state.studentEmail
-        : "nameless@email.com",
-      testResult: this.state.studentTestResult
-        ? this.state.studentTestResult
-        : "100",
-      city: this.state.studentCity ? this.state.studentCity : "Wroclaw",
-      mentor: this.state.studentMentor ? this.state.studentMentor : "Mentor",
-      description: this.state.studentDescription
-        ? this.state.studentDescription
-        : "Description"
-    });
-    this.props.history.push("/participants");
-*/
+
+    if (this.validate()) {
+      this.props.reduxStudentForm({
+        name: this.state.studentName,
+        surname: this.state.studentSurname,
+        city: this.state.studentCity,
+        email: this.state.studentEmail,
+        qualifyingPoints: this.state.studentTestResult,
+        description: this.state.studentDescription,
+        mentorPreferences: this.state.studentMentor
+      });
+    }
+  }
+
+  /*
+  addstudentButtonClick()
+  {
     axios
       .post("https://ptc-test-participants.herokuapp.com/api/participants", {
         name: this.state.studentName,
@@ -86,7 +79,8 @@ export default class StudentForm extends React.Component {
         description: this.state.studentDescription,
         mentorPreferences: this.state.studentMentor
       })
-      .then(response => {
+      .then(response =>
+      {
         console.log(response);
         alert("Student added to database");
         this.setState({
@@ -94,7 +88,8 @@ export default class StudentForm extends React.Component {
           iconLoading: false
         });
       })
-      .catch(error => {
+      .catch(error =>
+      {
         this.state.studentName
           ? alert(error.response.data)
           : alert("Please add student Name.");
@@ -116,6 +111,55 @@ export default class StudentForm extends React.Component {
         });
       });
   }
+*/
+
+  validate() {
+    let studentNameError = "";
+    let studentSurnameError = "";
+    let studentEmailError = "";
+    let studentTestResultError = "";
+    let studentCityError = "";
+    let errors = [];
+
+    if (
+      this.state.studentName.length < 1 &&
+      this.state.studentName.indexOf(" ") === -1
+    ) {
+      studentNameError = "Student name is not correct!";
+      errors.push(studentNameError);
+    }
+    if (
+      this.state.studentSurname.length < 1 &&
+      this.state.studentSurname.indexOf(" ") === -1
+    ) {
+      studentSurnameError = "Student surname is not correct!";
+      errors.push(studentSurnameError);
+    }
+    if (
+      this.state.studentEmail.length < 3 ||
+      this.state.email.indexOf("@") === -1
+    ) {
+      studentEmailError = "Student email is not correct!";
+      errors.push(studentEmailError);
+    }
+    if (this.state.studentTestResult.indexOf(" ") === -1) {
+      studentTestResultError = "Add student test result!";
+      errors.push(studentTestResultError);
+    }
+    if (this.state.studentCity.indexOf(" ") === -1) {
+      studentCityError = "Add student city!";
+      errors.push(studentCityError);
+    }
+    this.setState({
+      studentNameError: studentNameError,
+      studentSurnameError: studentSurnameError,
+      studentEmailError: studentEmailError,
+      studentTestResultError: studentTestResultError,
+      studentCityError: studentCityError
+    });
+    console.log(errors);
+    return errors.length === 0;
+  }
 
   render() {
     return (
@@ -124,46 +168,74 @@ export default class StudentForm extends React.Component {
         <div className="inputBar">
           <h2>Name</h2>
           <Input
-            className="inp"
+            className={
+              this.state.studentNameError ? "inputWithE" : "inputWithoutE"
+            }
             placeholder="Input name"
-            onChange={this.addstudentName.bind(this)}
+            val={this.state.studentName}
+            onChange={e => this.handleChange(e)}
           ></Input>
+          <div className="errors-form contact-form">
+            {this.state.studentNameError}
+          </div>
         </div>
 
         <div className="inputBar">
           <h2>Surname</h2>
           <Input
-            className="inp"
+            className={
+              this.state.studentNameError ? "inputWithE" : "inputWithoutE"
+            }
             placeholder="Input surname"
-            onChange={this.addstudentSurname.bind(this)}
+            val={this.state.studentSurname}
+            onChange={e => this.handleChange(e)}
           ></Input>
+          <div className="errors-form contact-form">
+            {this.state.studentSurnameError}
+          </div>
         </div>
 
         <div className="inputBar">
           <h2>Email</h2>
           <Input
-            className="inp"
+            className={
+              this.state.studentNameError ? "inputWithE" : "inputWithoutE"
+            }
             placeholder="Input email"
-            onChange={this.addstudentEmail.bind(this)}
+            val={this.state.studentEmail}
+            onChange={e => this.handleChange(e)}
           ></Input>
+          <div className="errors-form contact-form">
+            {this.state.studentEmailError}
+          </div>
         </div>
 
         <div className="inputBar">
-          <h2>City</h2>
-          <Select
-            defaultValue=" "
-            style={{ width: "100%" }}
-            onChange={value => this.addstudentCity(value)}
+          <div
+            className={
+              this.state.studentCityError ? "inputWithE" : "inputWithoutE"
+            }
           >
-            <Option value=" "></Option>
-            <Option value="Wroclaw">Wrocław</Option>
-            <Option value="Warszawa">Warszawa</Option>
-            <Option value="Zabrze">Zabrze</Option>
-            <Option value="Krakow">Kraków</Option>
-            <Option value="Poznan">Poznań</Option>
-            <Option value="Gdansk">Gdańsk</Option>
-            <Option value="Szczecin">Szczecin</Option>
-          </Select>
+            <h2>City</h2>
+            <Select
+              defaultValue=" "
+              style={{ width: "100%" }}
+              placeholder="Choose City"
+              onChange={value => this.addstudentCity(value)}
+            >
+              <Option value=" "></Option>
+              <Option value="Wroclaw">Wrocław</Option>
+              <Option value="Warszawa">Warszawa</Option>
+              <Option value="Zabrze">Zabrze</Option>
+              <Option value="Krakow">Kraków</Option>
+              <Option value="Poznan">Poznań</Option>
+              <Option value="Gdansk">Gdańsk</Option>
+              <Option value="Szczecin">Szczecin</Option>
+            </Select>
+          </div>
+          <div className="errors-form contact-form">
+            {this.state.studentCityError}
+          </div>
         </div>
 
         <div className="inputBar">
@@ -171,7 +243,7 @@ export default class StudentForm extends React.Component {
           <TextArea
             className="inp"
             placeholder="Student description"
-            onChange={this.addstudentDescription.bind(this)}
+            onChange={e => this.handleChange(e)}
             autoSize
           ></TextArea>
         </div>
@@ -180,9 +252,16 @@ export default class StudentForm extends React.Component {
           <h2>Qualifying test results</h2>
           <Input
             className="inp"
+            className={
+              this.state.studentNameError ? "inputWithE" : "inputWithoutE"
+            }
             placeholder="Qualifying test results"
-            onChange={this.addstudentTestResult.bind(this)}
+            val={this.state.studentTestResult}
+            onChange={e => this.handleChange(e)}
           ></Input>
+          <div className="errors-form contact-form">
+            {this.state.studentTestResultError}
+          </div>
         </div>
 
         <div className="inputBar">
@@ -190,7 +269,8 @@ export default class StudentForm extends React.Component {
           <Input
             className="inp"
             placeholder="Input mentor name"
-            onChange={this.addstudentMentor.bind(this)}
+            val={this.state.studentMentor}
+            onChange={e => this.handleChange(e)}
           ></Input>
         </div>
 
@@ -211,22 +291,16 @@ export default class StudentForm extends React.Component {
     );
   }
 }
-/*
+
 const mapStateToProps = state => {
   return {
-    name: state.studentName,
-    studentname: state.studentSurname,
-    email: state.studentEmail,
-    testResult: state.studentTestResult,
-    city: state.studentCity,
-    mentor: state.studentMentor,
-    description: state.studentDescription
+    check: state.studentCheck
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    reduxStudentForm: student => dispatch(addStudentAction(student))
+    reduxStudentForm: studentData => dispatch(addStudentAction(studentData))
   };
 };
 
@@ -234,4 +308,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(StudentForm));
-*/

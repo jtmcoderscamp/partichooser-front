@@ -15,8 +15,16 @@ h1 {
   width: 60%;
   border-color: #ffc53d;
 }
-
 .inp {
+  border-color: #ffc53d;
+}
+.ant-select-selection {
+  border-color: #ffc53d;
+}
+.inputWithE {
+  border-color: #ffc53d;
+}
+.inputWithoutE {
   border-color: #ffc53d;
 }
 
@@ -25,7 +33,6 @@ h1 {
   background-color: #c4c4c4;
 }
 .btn:hover {
-  text-align: center;
   background-color: #c4c4c4;
 }
 
