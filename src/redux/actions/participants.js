@@ -1,9 +1,9 @@
 export const ADD_PARTICIPANT_TO_MENTOR = "ADD_PARTICIPANT_TO_MENTOR";
 export const GET_PARTICIPANTS = "GET_PARTICIPANTS";
 
-async function _getParticipants(userId) {
+async function _getParticipants() {
   const response = await fetch(
-    `https://ptc-test-participants.herokuapp.com/api/participants?id=${userId}`,
+    `https://ptc-test-participants.herokuapp.com/api/participants`,
     {
       method: "GET"
     }
@@ -18,16 +18,16 @@ async function _getParticipants(userId) {
   return data;
 }
 
-async function _addParticipant(userId, participantId) {
+async function _addParticipant(participantId, userId) {
   const response = await fetch(
-    `https://ptc-test-participants.herokuapp.com/api/participants?id=${userId}`,
+    `https://ptc-test-participants.herokuapp.com/api/participants/${participantId}`,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        uuid: participantId
+        group: userId
       })
     }
   );
@@ -41,8 +41,8 @@ async function _addParticipant(userId, participantId) {
   return data;
 }
 
-export async function getParticipants(dispatch, userId) {
-  _getParticipants(userId)
+export async function getParticipants(dispatch) {
+  _getParticipants()
     .then(data => {
       dispatch({
         type: GET_PARTICIPANTS,
@@ -54,8 +54,8 @@ export async function getParticipants(dispatch, userId) {
     });
 }
 
-export async function addParticipant(dispatch, userId, participantId) {
-  _addParticipant(userId, participantId)
+export async function addParticipant(dispatch, participantId, userId) {
+  _addParticipant(participantId, userId)
     .then(data => {
       dispatch({
         type: ADD_PARTICIPANT_TO_MENTOR,

@@ -4,12 +4,14 @@ import thunkMiddleware from "redux-thunk";
 //Import reducers
 import userAuth from "./reducers/userAuth";
 import participants from "./reducers/participants";
+import participantListDisplay from "./reducers/participantListDisplay";
 import addStudent from "./reducers/addStudent";
 
 //Set up combined reducer
 const rootReducer = combineReducers({
   userAuth,
   participants,
+  participantListDisplay,
   addStudent
 });
 
