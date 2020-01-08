@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginView from "./_views/LoginView";
 import ParticipantPickingView from "./_views/ParticipantPickingView";
 import MentorManagementView from "./_views/MentorManagementView";
+import MentorGroupView from "./MentorGroup";
 
 /**
  * A simple router - not much to navigate as the work on the app has barely even started.
@@ -30,8 +31,12 @@ class App extends React.Component {
             {this._authProtect(<MentorManagementView />)}
           </Route>
           <Route path="/">
-            <ParticipantPickingView />
-            {/* {this._authProtect(<ParticipantPickingView />)} */}
+            {this._authProtect(
+              <div style={{ display: "flex" }}>
+                <MentorGroupView />
+                <ParticipantPickingView />
+              </div>
+            )}
           </Route>
         </Switch>
       </Router>

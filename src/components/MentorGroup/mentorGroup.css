@@ -1,0 +1,35 @@
+.logo-component {
+  color: #999;
+  /* background-image: url(../../../static/logo.png); */
+  background-image: url(logo.png);
+  width: 8vw;
+  height: 8vw;
+  margin: 5px auto;
+  border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+  border: 3px solid rgb(252, 212, 33);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mentorGroup-component {
+  width: 25vw;
+  height: 50vw;
+}
+.listOfMembers-component {
+  margin: 3vw;
+  text-align: center;
+  color: rgb(252, 212, 33);
+  font-size: 30px;
+  font-weight: 500;
+}
+.member-component {
+  font-size: 20px;
+  color: #000;
+  text-align: center;
+  margin: 5px 2vw 5px 4vw;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
