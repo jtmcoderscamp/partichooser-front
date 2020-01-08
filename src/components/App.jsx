@@ -3,9 +3,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import LoginView from "./_views/LoginView";
-import ParticipantPickingView from "./_views/ParticipantPickingView";
 import MentorManagementView from "./_views/MentorManagementView";
-import MentorGroupView from "./MentorGroup";
+import ParticipantsManagementView from "./_views/ParticipantsManagementView";
 
 /**
  * A simple router - not much to navigate as the work on the app has barely even started.
@@ -25,18 +24,13 @@ class App extends React.Component {
 
         <Switch>
           <Route path="/participants">
-            {this._authProtect(<ParticipantPickingView />)}
+            {this._authProtect(<ParticipantsManagementView />)}
           </Route>
           <Route path="/mentors">
             {this._authProtect(<MentorManagementView />)}
           </Route>
           <Route path="/">
-            {this._authProtect(
-              <div style={{ display: "flex" }}>
-                <MentorGroupView />
-                <ParticipantPickingView />
-              </div>
-            )}
+            {this._authProtect(<ParticipantsManagementView />)}
           </Route>
         </Switch>
       </Router>

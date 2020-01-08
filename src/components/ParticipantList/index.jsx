@@ -92,9 +92,9 @@ export class ParticipantList extends React.PureComponent {
     this.listConfig = {
       name: { width: "20%", label: "Name" },
       surname: { width: "20%", label: "Surname" },
-      city: { width: "10%", label: "City" },
+      city: { width: "15%", label: "City" },
       testResults: { width: "20%", label: "Test result" },
-      addToGroup: { width: "30%", label: "Add to my group" }
+      addToGroup: { width: "25%", label: "Add to my group" }
     };
   }
 
@@ -115,9 +115,9 @@ export class ParticipantList extends React.PureComponent {
         style={{ minHeight: `calc(100vh - ${this.state.offsetTop}px)` }}
       >
         <div>
-          <Heading>{`All Students (${city})`}</Heading>
+          <Heading>{`All Students ${city ? `(${city})` : ""}`}</Heading>
         </div>
-        {participants.data && participants.data.length ? (
+        {participants && participants.length ? (
           <div className="list">
             <div className={classnames("list-row", "list-row-titles")}>
               <div style={{ width: this.listConfig.name.width }}>
@@ -142,7 +142,7 @@ export class ParticipantList extends React.PureComponent {
                 {this.listConfig.addToGroup.label}
               </div>
             </div>
-            {participants.data.map(participant => (
+            {participants.map(participant => (
               <ParticipantListItem
                 key={participant.uuid}
                 participant={participant}

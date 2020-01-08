@@ -43,6 +43,9 @@ async function _addParticipant(participantId, userId) {
 }
 
 export async function getParticipants(dispatch) {
+  dispatch({
+    type: LOAD_NEW_PARTICIPANTS
+  });
   _getParticipants()
     .then(data => {
       dispatch({

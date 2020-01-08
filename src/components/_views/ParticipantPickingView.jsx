@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import SampleComponent from "../SampleComponent";
 import { withRouter } from "react-router";
 import { ParticipantList } from "../ParticipantList";
 import {
@@ -19,7 +18,10 @@ class ParticipantPickingView extends React.PureComponent {
     super(props);
     this.state = {
       /**@type {{field: string, value: string}[]} - this table represents the filter conditions as {field: value} pairs */
-      filterConditions: [{ field: "name", value: "a" }]
+      filterConditions: [
+        { field: "name", value: "a" },
+        { field: "city", value: this.props.city || "" }
+      ]
     };
   }
 
@@ -29,38 +31,49 @@ class ParticipantPickingView extends React.PureComponent {
   }
 
   static getDerivedStateFromProps(props, state) {
+    const filterConditions = [
+      { field: "name", value: "a" },
+      { field: "city", value: props.city || "" }
+    ];
     //order re-filtering of the list of participants to display if the index is likely to be out-of-date
     if (props.displayIndexStale) {
-      props.filterParticipantList(props.participants, state.filterConditions);
+      console.log("lets filter", state, props, props.city);
+      props.filterParticipantList(
+        props.user,
+        props.participants,
+        state.filterConditions
+      );
     }
     return null;
   }
 
   render() {
-    const { participants, user, addParticipant } = this.props;
+    const { participants, user, isLoading, addParticipant } = this.props;
     const userId = user.uuid;
 
+    console.log("participants picking view props", this.props);
+
     return (
-      <SampleComponent>
+      <div style={{ width: "100%" }}>
         <div>
           {user.name
             ? `You're logged in as "${user.name}"`
             : `You're not logged in`}
         </div>
-        {participants.loading ? (
+        {isLoading ? (
           <Loader />
         ) : (
           <ParticipantList
-            city="Wroclaw"
-            participants={this.props.displayIndex.map(
-              uuid => participants[uuid]
-            )}
+            participants={this.props.displayIndex
+              .filter(({ groupUuid }) => user.uuid !== groupUuid)
+              .map(uuid => participants[uuid])}
+            city={this.props.city}
             onAddParticipant={id => {
               addParticipant(id, userId);
             }}
           />
         )}
-      </SampleComponent>
+      </div>
     );
   }
 }
@@ -68,7 +81,8 @@ class ParticipantPickingView extends React.PureComponent {
 const mapStateToProps = state => {
   return {
     user: state.userAuth,
-    participants: state.participants,
+    participants: state.participants.data,
+    isLoading: state.participants.loading,
     displayIndex: state.participantListDisplay.uuidList,
     displayIndexStale: state.participantListDisplay.stale
   };
@@ -79,8 +93,8 @@ const mapDispatchToProps = dispatch => {
     getParticipants: userId => getParticipants(dispatch, userId),
     addParticipant: (participantId, userId) =>
       addParticipant(dispatch, participantId, userId),
-    filterParticipantList: (participants, conditions) =>
-      dispatch(filterParticipantList(participants, conditions))
+    filterParticipantList: (user, participants, filterConditions) =>
+      dispatch(filterParticipantList(user, participants, filterConditions))
   };
 };
 
