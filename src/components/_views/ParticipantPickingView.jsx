@@ -30,14 +30,24 @@ class ParticipantPickingView extends React.PureComponent {
     getParticipants();
   }
 
+  componentDidUpdate(oldProps) {
+    console.log("did update", oldProps.city, this.props.city);
+    if (oldProps.city !== this.props.city) {
+      console.log("update city", this.state.filterConditions);
+      this.props.filterParticipantList(
+        this.props.user,
+        this.props.participants,
+        [
+          { field: "name", value: "a" },
+          { field: "city", value: this.props.city || "" }
+        ]
+      );
+    }
+  }
+
   static getDerivedStateFromProps(props, state) {
-    const filterConditions = [
-      { field: "name", value: "a" },
-      { field: "city", value: props.city || "" }
-    ];
     //order re-filtering of the list of participants to display if the index is likely to be out-of-date
     if (props.displayIndexStale) {
-      console.log("lets filter", state, props, props.city);
       props.filterParticipantList(
         props.user,
         props.participants,
