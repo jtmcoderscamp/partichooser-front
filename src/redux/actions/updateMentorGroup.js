@@ -1,9 +1,9 @@
-export const MENTOR_GROUP = "MENTOR_GROUP";
+export const UPDATE_MENTOR_GROUP = "UPDATE_MENTOR_GROUP";
 
 export default function(mentor, students) {
   console.log("funkcja mentor");
   return {
-    type: MENTOR_GROUP,
+    type: UPDATE_MENTOR_GROUP,
     payload: {
       mentor,
       students

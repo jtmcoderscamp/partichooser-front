@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Icon } from "antd";
 import "./mentorGroup.css";
 import { fetchStudentA } from "../../redux/actions/fetchStudent";
-import mentorGroup from "../../redux/actions/mentorGroup";
+import updateMentorGroup from "../../redux/actions/updateMentorGroup";
 // import removeGroupMemberA from "../../redux/actions/removeGroupMemberA";
 
 import { withRouter } from "react-router";
@@ -12,7 +12,9 @@ class ListOfMembers extends React.Component {
   componentDidMount() {
     this.props
       .fetchStudentA()
-      .then(() => this.props.mentorGroup(this.props.user, this.props.students))
+      .then(() =>
+        this.props.updateMentorGroup(this.props.user, this.props.students)
+      )
       .catch(err => console.log("Error", err));
   }
 
@@ -58,14 +60,14 @@ class ListOfMembers extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.userAuth,
-    members: state.listMentorGroup,
+    members: state.mentorGroup,
     students: state.fetchStudent
   };
 };
 
 const mapDispatchToProps = {
   fetchStudentA,
-  mentorGroup
+  updateMentorGroup
 };
 
 export default connect(

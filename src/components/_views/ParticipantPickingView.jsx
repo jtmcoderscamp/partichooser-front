@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import SampleComponent from "../SampleComponent";
-import MentorGroupView from "../MentorGroup";
 import { withRouter } from "react-router";
 import { ParticipantList } from "../ParticipantList";
 import {
@@ -30,8 +29,9 @@ class ParticipantPickingView extends React.PureComponent {
 
   static getDerivedStateFromProps(props, state) {
     //order re-filtering of the list of participants to display if the index is likely to be out-of-date
-    if (props.displayIndexStale)
-      props.filterParticipantList(props.participants, state.conditions);
+    if (props.displayIndexStale) {
+      props.filterParticipantList(props.participants, state.filterConditions);
+    }
     return null;
   }
 

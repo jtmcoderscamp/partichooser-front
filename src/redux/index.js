@@ -7,7 +7,7 @@ import participants from "./reducers/participants";
 import participantListDisplay from "./reducers/participantListDisplay";
 import addStudent from "./reducers/addStudent";
 import fetchStudent from "./reducers/fetchStudent";
-import listMentorGroup from "./reducers/listMentorGroup";
+import mentorGroup from "./reducers/mentorGroup";
 // import removeGroupMember from "./reducers/removeGroupMember";
 
 //Set up combined reducer
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   participants,
   participantListDisplay,
   fetchStudent,
-  listMentorGroup,
+  mentorGroup,
   addStudent
   // removeGroupMember,
 });
