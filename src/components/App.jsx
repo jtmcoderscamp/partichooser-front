@@ -17,7 +17,7 @@ export default class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/">
-            <LoginView />
+            <MentorManagementView />
           </Route>
           <Route path="/login">
             <LoginView />
@@ -25,8 +25,8 @@ export default class App extends React.Component {
           <Route path="/participants">
             <ParticipantPickingView />
           </Route>
-          <Route path="/mentors">
-            <MentorManagementView />
+          <Route path="/addmentor">
+            <LoginView />
           </Route>
         </Switch>
       </Router>

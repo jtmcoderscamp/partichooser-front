@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Button, Input } from "antd";
 import logInButFake from "../../redux/actions/logInButFake";
 import { withRouter } from "react-router";
-import { Alert } from "reactstrap";
 
 /**
  * Fake form for signing in - no backend, not even a password field.
@@ -14,10 +13,7 @@ class FakeLogInForm extends React.Component {
     super(props);
 
     this.state = {
-      userName: "",
-      userSurname: "",
-      userMail: "",
-      shouldAlert: false
+      userName: ""
     };
   }
 
@@ -25,57 +21,27 @@ class FakeLogInForm extends React.Component {
     this.setState({ userName: e.target.value });
   }
 
-  onUserSurnameChange(e) {
-    this.setState({ userSurname: e.target.value });
-  }
-
-  onUserMailChange(e) {
-    this.setState({ userMail: e.target.value });
-  }
-
   onLogInButtonClick() {
-    if (
-      this.state.userName !== "" &&
-      this.state.userSurname !== "" &&
-      this.state.userMail !== ""
-    ) {
-      this.props.history.push("/mentors");
-    } else {
-      return this.setState({ shouldAlert: true });
-    }
-  }
-  componentDidUpdate() {
-    console.log("updated");
+    this.props.reduxLogIn({
+      name: this.state.userName ? this.state.userName : "nameless"
+    });
+    this.props.history.push("/participants");
   }
 
   render() {
     return (
-      <div className="inputscontainer">
+      <div>
         <Input
-          className="input-hover"
-          placeholder="Name:"
+          placeholder="user name"
           onChange={this.onUserNameChange.bind(this)}
         />
-        <Input
-          className="input-hover"
-          placeholder="Surname:"
-          onChange={this.onUserSurnameChange.bind(this)}
-        />
-        <Input
-          className="input-hover"
-          placeholder="E-mail:"
-          onChange={this.onUserMailChange.bind(this)}
-        />
         <Button
-          className="modified-item"
-          shape="circle"
-          icon="plus"
-          size="large"
+          type="primary"
+          block={true}
           onClick={this.onLogInButtonClick.bind(this)}
-        ></Button>
-        {this.state.shouldAlert ? (
-          <Alert color="warning">You have to fill the data!</Alert>
-        ) : null}
+        >
+          Fake log in!
+        </Button>
       </div>
     );
   }

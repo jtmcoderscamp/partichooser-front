@@ -26,3 +26,7 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.ant-spin-dot-item {
+  background-color: #ffc53d;
+}

@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,11 @@
   color: #ffc53d;
   outline: none;
   margin: 3%;
+}
+
+.ant-btn:focus {
+  border-color: #ffc53d;
+  color: #ffc53d;
 }
 
 .modified-item:hover {

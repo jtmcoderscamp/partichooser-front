@@ -7,12 +7,16 @@ export default class Header extends React.Component {
   render() {
     return (
       <header className="navbar">
-        <div className="logo">
-          <img src={Logo}></img>
+        <div>
+          <img className="logo" src={Logo}></img>
         </div>
-        <Link to="/">HOME</Link>
-        <br />
-        <Link to="/mentors">MENTORS</Link>
+        <div className="nav">
+          <Link to="/addmentor">Add mentor</Link>
+          <br />
+          <Link to="/">Add student</Link>
+          <Link to="/">Change city</Link>
+          <Link to="/">Log out</Link>
+        </div>
       </header>
     );
   }

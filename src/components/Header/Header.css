@@ -1,3 +1,37 @@
+#root {
+  height: 80%;
+}
+.main {
+  height: 100%;
+}
 .navbar {
   background-color: white;
+  display: flex;
+}
+
+.nav {
+  float: right;
+  display: flex;
+  justify-content: flex-end;
+  margin: auto 0 auto auto;
+}
+
+.nav a {
+  padding: 0 2%;
+  min-width: 35%;
+  color: #ffc53d;
+  text-align: center;
+  border-left: 1px solid;
+}
+
+.nav a:first-child {
+  border: none;
+}
+
+a {
+}
+.logo {
+  padding: 10% 20%;
+  height: 6rem;
+  width: auto;
 }
