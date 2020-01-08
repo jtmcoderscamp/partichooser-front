@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import SampleComponent from "../SampleComponent";
+import MentorGroupView from "../MentorGroup";
 import { withRouter } from "react-router";
 import { ParticipantList } from "../ParticipantList";
 import {
