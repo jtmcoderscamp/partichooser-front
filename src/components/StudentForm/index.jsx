@@ -100,12 +100,12 @@ class StudentForm extends React.Component {
       studentEmailError = "Student email is not correct!";
       errors.push(studentEmailError);
     }
-    /*
-    if (this.state.studentTestResult.indexOf(" ") === -1) {
+
+    if (this.state.studentTestResult <= 0) {
       studentTestResultError = "Add student test result!";
       errors.push(studentTestResultError);
     }
-   
+    /*
     if (this.state.studentCity.indexOf(" ") === -1) {
       studentCityError = "Add student city!";
       errors.push(studentCityError);
