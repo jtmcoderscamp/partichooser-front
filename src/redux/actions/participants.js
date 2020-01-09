@@ -23,12 +23,12 @@ async function _addParticipant(participantId, userId) {
   const response = await fetch(
     `https://ptc-test-participants.herokuapp.com/api/participants/${participantId}`,
     {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        group: userId
+        groupUuid: userId
       })
     }
   );
