@@ -25,8 +25,6 @@ class StudentForm extends React.Component {
       studentEmailError: "",
       studentTestResultError: "",
       studentCityError: "",
-
-      send: false,
       error: ""
     };
   }
@@ -67,10 +65,10 @@ class StudentForm extends React.Component {
         email: this.state.studentEmail,
         qualifyingPoints: this.state.studentTestResult,
         description: this.state.studentDescription,
-        mentorPreferences: this.state.studentMentor
+        mentorPreferences: this.state.studentMentor,
+        iconLoading: this.state.iconLoading
       });
-    }
-    this.setState({ iconLoading: false });
+    } else this.setState({ iconLoading: false });
   }
 
   validate() {
