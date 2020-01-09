@@ -13,13 +13,11 @@ export default function addStudent(state = {}, action) {
     case FAIL_ADD_STUDENT:
       console.log("add-student failed: ");
       //endLogin();
-      action.payload.iconLoading = false;
-      return { status: "failed", ...action.payload };
+      return { status: "failed", iconLoading: false, ...action.payload };
     case COMPLETE_ADD_STUDENT:
       console.log("add-student successful");
-      action.payload.iconLoading = false;
       //endLogin();
-      return { status: "success", ...action.payload };
+      return { status: "success", iconLoading: false, ...action.payload };
     default:
       return state;
   }
