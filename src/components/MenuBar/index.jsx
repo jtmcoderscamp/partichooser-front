@@ -1,17 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./menuBar.css";
-import { Button, Menu } from "antd";
+import { Menu } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import logOut from "../../redux/actions/logOut";
 import { setCurrentCityFilter } from "../../redux/actions/filters";
 
 class MenuBar extends React.Component {
-  constructor(props) {
-    super(props);
-    //this.state
-  }
-
   handleCitySelect(e) {
     this.props.selectCity(e.key);
   }
