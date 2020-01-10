@@ -1,3 +1,10 @@
 .sample-component {
-  color: #833;
+  margin: auto 0;
+  width: 30%;
+}
+
+.pagetitle {
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
 }
