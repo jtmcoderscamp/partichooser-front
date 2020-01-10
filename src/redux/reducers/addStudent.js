@@ -9,15 +9,14 @@ export default function addStudent(state = {}, action) {
   switch (action.type) {
     case ATTEMPT_ADD_STUDENT:
       console.log("attempting add-student");
-      return { status: "pending" };
+      return { status: "studentAddPending" };
     case FAIL_ADD_STUDENT:
       console.log("add-student failed: ");
-      //endLogin();
-      return { status: "failed", iconLoading: false, ...action.payload };
+      return { status: "failedAddStudent", ...action.payload };
     case COMPLETE_ADD_STUDENT:
       console.log("add-student successful");
-      //endLogin();
-      return { status: "success", iconLoading: false, ...action.payload };
+      alert("Student added to database");
+      return { status: "studentAdded", ...action.payload };
     default:
       return state;
   }

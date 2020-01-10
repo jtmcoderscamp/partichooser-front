@@ -24,8 +24,7 @@ export default function AddStudent({
   city,
   qualifyingPoints,
   description,
-  mentorPreferences,
-  iconLoading
+  mentorPreferences
 }) {
   return function(dispatch) {
     //dispatch the action signaling that log-in process has started
@@ -43,13 +42,11 @@ export default function AddStudent({
       })
       .then(response => {
         //succes Student added
-        alert("Student added to database");
-        dispatch(completeAddstudent(response, iconLoading));
+        dispatch(completeAddstudent(response));
       })
       .catch(error => {
         //process AddStudent failure
-        dispatch(failAddStudent(error.response.data, iconLoading));
-        console.log(error.response.data);
+        dispatch(failAddStudent(error));
       });
   };
 }
@@ -63,10 +60,10 @@ export function attemptAddStudent() {
   };
 }
 
-export function completeAddstudent({ success, iconLoading }) {
+export function completeAddstudent(success) {
   return {
     type: COMPLETE_ADD_STUDENT,
-    payload: { success, iconLoading }
+    payload: { success }
   };
 }
 
@@ -74,9 +71,9 @@ export function completeAddstudent({ success, iconLoading }) {
  * Action dispatched on Add student failure
  * @param {string} errorMessage
  */
-export function failAddStudent({ errorMessage, iconLoading }) {
+export function failAddStudent(errorMessage) {
   return {
     type: FAIL_ADD_STUDENT,
-    payload: { errorMessage, iconLoading }
+    payload: { errorMessage }
   };
 }

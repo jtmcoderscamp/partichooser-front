@@ -51,6 +51,7 @@ class StudentForm extends React.Component {
   addstudentMentor(e) {
     this.setState({ studentMentor: e.target.value });
   }
+
   enterIconLoading = () => {
     this.setState({ iconLoading: true });
   };
@@ -65,8 +66,7 @@ class StudentForm extends React.Component {
         email: this.state.studentEmail,
         qualifyingPoints: this.state.studentTestResult,
         description: this.state.studentDescription,
-        mentorPreferences: this.state.studentMentor,
-        iconLoading: this.state.iconLoading
+        mentorPreferences: this.state.studentMentor
       });
     } else this.setState({ iconLoading: false });
   }
@@ -242,7 +242,7 @@ class StudentForm extends React.Component {
             shape="round"
             icon="plus"
             block={true}
-            loading={this.state.iconLoading}
+            loading={this.props.check.status === "studentAddPending"}
             onClick={this.addstudentButtonClick.bind(this)}
           >
             Add student
@@ -255,7 +255,7 @@ class StudentForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    check: state.studentCheck
+    check: state.addStudent
   };
 };
 

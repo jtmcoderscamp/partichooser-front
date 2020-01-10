@@ -8,6 +8,7 @@ import {
 } from "../../redux/actions/participants";
 import Loader from "../Loader/index";
 import { filterParticipantList } from "../../redux/actions/updateParticipantListDisplay";
+import StudentForm from "../StudentForm";
 
 /**
  * A relatively simple functional component,
@@ -83,6 +84,9 @@ class ParticipantPickingView extends React.PureComponent {
             }}
           />
         )}
+        <div>
+          <StudentForm />
+        </div>
       </div>
     );
   }
