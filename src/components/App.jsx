@@ -2,9 +2,11 @@ import "antd/dist/antd.css";
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Menu } from "antd";
 import LoginView from "./_views/LoginView";
 import MentorManagementView from "./_views/MentorManagementView";
 import ParticipantsManagementView from "./_views/ParticipantsManagementView";
+import MenuBar from "./MenuBar";
 
 /**
  * A simple router - not much to navigate as the work on the app has barely even started.
@@ -15,11 +17,17 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          See how this part doesn't change at all
-          <br />
-          <Link to="/">HOME</Link>
-          <br />
-          <Link to="/mentors">Mentor management</Link>
+          <MenuBar>
+            <Menu.Item>
+              <Link to="/">HOME</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/mentors">Mentor management</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/participants">Participants</Link>
+            </Menu.Item>
+          </MenuBar>
         </div>
 
         <Switch>

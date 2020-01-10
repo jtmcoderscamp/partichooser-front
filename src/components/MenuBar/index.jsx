@@ -1,9 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./menuBar.css";
 import { Button, Menu } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
+import logOut from "../../redux/actions/logOut";
 
-export default class MenuBar extends React.Component {
+class MenuBar extends React.Component {
   constructor(props) {
     super(props);
     //this.state
@@ -34,14 +36,26 @@ export default class MenuBar extends React.Component {
           <Menu mode="horizontal">
             {this.props.children}
             <SubMenu title="Change city">
-              {list.map(element => {
-                return <Menu.Item>{element}</Menu.Item>;
+              {list.map(cityName => {
+                return <Menu.Item key={cityName}>{cityName}</Menu.Item>;
               })}
             </SubMenu>
-            <Menu.Item>Log out</Menu.Item>
+            <Menu.Item onClick={this.props.logOut}>Log out</Menu.Item>
           </Menu>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(logOut())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuBar);
