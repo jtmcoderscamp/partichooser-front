@@ -10,6 +10,10 @@ const { Option } = Select;
 class StudentForm extends React.Component {
   constructor(props) {
     super(props);
+    if (!this.props.listOfCities)
+      throw new Error(
+        "Can't construct participant adding form. List of cites to pick from required"
+      );
     this.state = {
       studentName: "",
       studentSurname: "",
@@ -184,14 +188,11 @@ class StudentForm extends React.Component {
               placeholder="Choose City"
               onChange={value => this.addstudentCity(value)}
             >
-              <Option value=" "></Option>
-              <Option value="Wroclaw">Wrocław</Option>
-              <Option value="Warszawa">Warszawa</Option>
-              <Option value="Zabrze">Zabrze</Option>
-              <Option value="Krakow">Kraków</Option>
-              <Option value="Poznan">Poznań</Option>
-              <Option value="Gdansk">Gdańsk</Option>
-              <Option value="Szczecin">Szczecin</Option>
+              {this.props.listOfCities.map(cityName => (
+                <Option key={cityName} value={cityName}>
+                  {cityName}
+                </Option>
+              ))}
             </Select>
           </div>
           <div className="errors-form contact-form">
