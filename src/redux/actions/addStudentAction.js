@@ -46,7 +46,8 @@ export default function AddStudent({
       })
       .catch(error => {
         //process AddStudent failure
-        dispatch(failAddStudent(error));
+        dispatch(failAddStudent(error.response.data));
+        alert(error.response.data);
       });
   };
 }
