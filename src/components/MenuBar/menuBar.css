@@ -1,0 +1,29 @@
+.menu {
+  display: flex;
+  height: 10vh;
+  width: 100vw;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.menu .buttons {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.menu .buttons .button {
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+.menu .ikona {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.menu img {
+  min-width: 7vh;
+  height: 7vh;
+}
