@@ -1,16 +1,23 @@
-import { ADD_STUDENT } from "../actions/addStudentAction";
-
+//import endLogin from "../../components/StudentForm/index.jsx";
+import {
+  ATTEMPT_ADD_STUDENT,
+  FAIL_ADD_STUDENT,
+  COMPLETE_ADD_STUDENT
+} from "../actions/addStudentAction";
+//Similar to the user auth
 export default function addStudent(state = {}, action) {
   switch (action.type) {
-    case ADD_STUDENT:
-      console.log("Name: " + action.payload.name);
-      console.log("Surname: " + action.payload.surname);
-      console.log("Email: " + action.payload.email);
-      console.log("Test Result: " + action.payload.testResult);
-      console.log("City: " + action.payload.city);
-      console.log("Description: " + action.payload.description);
-      console.log("Mentor: " + action.payload.mentor);
-      return { ...action.payload };
+    case ATTEMPT_ADD_STUDENT:
+      console.log("attempting add-student");
+      return { status: "pending" };
+    case FAIL_ADD_STUDENT:
+      console.log("add-student failed: ");
+      //endLogin();
+      return { status: "failed", iconLoading: false, ...action.payload };
+    case COMPLETE_ADD_STUDENT:
+      console.log("add-student successful");
+      //endLogin();
+      return { status: "success", iconLoading: false, ...action.payload };
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import participantListDisplay from "./reducers/participantListDisplay";
 import addStudent from "./reducers/addStudent";
 import fetchStudent from "./reducers/fetchStudent";
 import mentorGroup from "./reducers/mentorGroup";
+import participantFilters from "./reducers/filters";
 // import removeGroupMember from "./reducers/removeGroupMember";
 
 //Set up combined reducer
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   userAuth,
   participants,
   participantListDisplay,
+  participantFilters,
   fetchStudent,
   mentorGroup,
   addStudent

@@ -14,12 +14,33 @@ class ParticipantListItem extends React.PureComponent {
     };
   }
   render() {
-    const { participant, onAddParticipant, listConfig } = this.props;
+    const {
+      participant,
+      onAddParticipant,
+      listConfig,
+      showOnlyWithoutGroup,
+      userId
+    } = this.props;
+
+    const isInCurrentUserGroup =
+      participant.groupUuid && participant.groupUuid === userId;
+    const isInOtherUserGroup =
+      participant.groupUuid && participant.groupUuid !== userId;
+
+    const fieldClasses = classnames(
+      "dark-background",
+      "toggle-details-container",
+      {
+        "yellow-background": !showOnlyWithoutGroup && isInCurrentUserGroup,
+        "red-background": !showOnlyWithoutGroup && isInOtherUserGroup
+      }
+    );
+
     return (
       <>
         <div className="list-row">
           <div
-            className={classnames("dark", "toggle-details-container")}
+            className={fieldClasses}
             style={{ width: listConfig.name.width }}
           >
             <Icon
@@ -32,14 +53,20 @@ class ParticipantListItem extends React.PureComponent {
             />
             {participant.name}
           </div>
-          <div className="dark" style={{ width: listConfig.surname.width }}>
+          <div
+            className={fieldClasses}
+            style={{ width: listConfig.surname.width }}
+          >
             {participant.surname}
           </div>
-          <div className="dark" style={{ width: listConfig.city.width }}>
+          <div
+            className={fieldClasses}
+            style={{ width: listConfig.city.width }}
+          >
             {participant.city}
           </div>
           <div
-            className="dark right"
+            className={(fieldClasses, "right")}
             style={{ width: listConfig.testResults.width }}
           >
             {participant.qualifyingPoints}
@@ -48,15 +75,18 @@ class ParticipantListItem extends React.PureComponent {
             className="centered"
             style={{ width: listConfig.addToGroup.width }}
           >
-            <Icon
-              onClick={() => onAddParticipant(participant.uuid)}
-              type="plus"
-              className="action"
-            />
+            {((!showOnlyWithoutGroup && !participant.groupUuid) ||
+              showOnlyWithoutGroup) && (
+              <Icon
+                onClick={() => onAddParticipant(participant.uuid)}
+                type="plus"
+                className="action"
+              />
+            )}
           </div>
         </div>
         {this.state.showDetails ? (
-          <div className={classnames("details", "dark")}>
+          <div className={classnames("details", "dark-background")}>
             <div>
               Additional information of {participant.name} {participant.surname}
             </div>
@@ -96,6 +126,10 @@ export class ParticipantList extends React.PureComponent {
       testResults: { width: "20%", label: "Test result" },
       addToGroup: { width: "25%", label: "Add to my group" }
     };
+    this.filterOptions = {
+      all: "all",
+      withoutGroup: "withoutGroup"
+    };
   }
 
   componentDidMount() {
@@ -107,15 +141,41 @@ export class ParticipantList extends React.PureComponent {
   }
 
   render() {
-    const { city, participants, onAddParticipant } = this.props;
+    const {
+      city,
+      participants,
+      onAddParticipant,
+      showOnlyWithoutGroup,
+      setShowOnlyWithoutGroup,
+      userId
+    } = this.props;
+
+    console.log("showOnlyWithoutGroup", showOnlyWithoutGroup);
+
     return (
       <div
         className="container"
         ref={this.containerRef}
         style={{ minHeight: `calc(100vh - ${this.state.offsetTop}px)` }}
       >
-        <div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Heading>{`All Students ${city ? `(${city})` : ""}`}</Heading>
+          <div className="filters">
+            <label htmlFor="applyFilters">Show students:</label>
+            <select
+              id="applyFilters"
+              onChange={e => {
+                setShowOnlyWithoutGroup(
+                  e.target.value === this.filterOptions.withoutGroup
+                );
+              }}
+            >
+              <option value={this.filterOptions.all}>All</option>
+              <option value={this.filterOptions.withoutGroup}>
+                Not assigned to group
+              </option>
+            </select>
+          </div>
         </div>
         {participants && participants.length ? (
           <div className="list">
@@ -148,6 +208,8 @@ export class ParticipantList extends React.PureComponent {
                 participant={participant}
                 onAddParticipant={onAddParticipant}
                 listConfig={this.listConfig}
+                showOnlyWithoutGroup={showOnlyWithoutGroup}
+                userId={userId}
               />
             ))}
           </div>

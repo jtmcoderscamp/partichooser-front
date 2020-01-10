@@ -5,6 +5,7 @@ import "./mentorGroup.css";
 import { fetchStudentA } from "../../redux/actions/fetchStudent";
 import updateMentorGroup from "../../redux/actions/updateMentorGroup";
 // import removeGroupMemberA from "../../redux/actions/removeGroupMemberA";
+import { removeParticipant } from "../../redux/actions/participants";
 
 import { withRouter } from "react-router";
 
@@ -37,6 +38,9 @@ class ListOfMembers extends React.Component {
               <Icon
                 type="minus-circle"
                 style={{ color: " rgb(252, 212, 33)" }}
+                onClick={() => {
+                  removeParticipant(member.uuid);
+                }}
               />
             </div>
           </div>

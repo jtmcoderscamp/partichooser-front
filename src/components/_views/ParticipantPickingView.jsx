@@ -6,6 +6,7 @@ import {
   getParticipants,
   addParticipant
 } from "../../redux/actions/participants";
+import { showOnlyParticipantsWithoutGroup } from "../../redux/actions/filters";
 import Loader from "../Loader/index";
 import { filterParticipantList } from "../../redux/actions/updateParticipantListDisplay";
 
@@ -16,49 +17,55 @@ import { filterParticipantList } from "../../redux/actions/updateParticipantList
 class ParticipantPickingView extends React.PureComponent {
   constructor(props) {
     super(props);
+    console.log("update me", props);
     this.state = {
       /**@type {{field: string, value: string}[]} - this table represents the filter conditions as {field: value} pairs */
       filterConditions: [
-        { field: "name", value: "a" },
-        { field: "city", value: this.props.city || "" }
+        { field: "city", value: props.city || "" },
+        { field: "withoutGroup", value: props.showOnlyWithoutGroup }
       ]
     };
   }
 
   componentDidMount() {
+    const { user } = this.props;
+    const userId = user.uuid;
     const { getParticipants } = this.props;
-    getParticipants();
+    getParticipants(userId);
   }
 
   componentDidUpdate(oldProps) {
-    console.log("did update", oldProps.city, this.props.city);
-    if (oldProps.city !== this.props.city) {
-      console.log("update city", this.state.filterConditions);
-      this.props.filterParticipantList(
-        this.props.user,
-        this.props.participants,
-        [
-          { field: "name", value: "a" },
-          { field: "city", value: this.props.city || "" }
-        ]
-      );
+    console.log("did update", oldProps, this.props);
+    if (
+      oldProps.city !== this.props.city ||
+      oldProps.showOnlyWithoutGroup !== this.props.showOnlyWithoutGroup
+    ) {
+      console.log("update me", this.props);
+      this.props.filterParticipantList(this.props.participants, [
+        { field: "name", value: "a" },
+        { field: "city", value: this.props.city || "" },
+        { field: "withoutGroup", value: this.props.showOnlyWithoutGroup }
+      ]);
     }
   }
 
   static getDerivedStateFromProps(props, state) {
     //order re-filtering of the list of participants to display if the index is likely to be out-of-date
     if (props.displayIndexStale) {
-      props.filterParticipantList(
-        props.user,
-        props.participants,
-        state.filterConditions
-      );
+      props.filterParticipantList(props.participants, state.filterConditions);
     }
     return null;
   }
 
   render() {
-    const { participants, user, isLoading, addParticipant } = this.props;
+    const {
+      participants,
+      user,
+      isLoading,
+      addParticipant,
+      showOnlyWithoutGroup,
+      setShowOnlyWithoutGroup
+    } = this.props;
     const userId = user.uuid;
 
     console.log("participants picking view props", this.props);
@@ -74,13 +81,16 @@ class ParticipantPickingView extends React.PureComponent {
           <Loader />
         ) : (
           <ParticipantList
-            participants={this.props.displayIndex
-              .filter(({ groupUuid }) => user.uuid !== groupUuid)
-              .map(uuid => participants[uuid])}
+            participants={this.props.displayIndex.map(
+              uuid => participants[uuid]
+            )}
             city={this.props.city}
             onAddParticipant={id => {
               addParticipant(id, userId);
             }}
+            showOnlyWithoutGroup={showOnlyWithoutGroup}
+            setShowOnlyWithoutGroup={setShowOnlyWithoutGroup}
+            userId={user.uuid}
           />
         )}
       </div>
@@ -89,12 +99,15 @@ class ParticipantPickingView extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
+  console.log("CITY: ", state.participantFilters);
   return {
     user: state.userAuth,
     participants: state.participants.data,
     isLoading: state.participants.loading,
     displayIndex: state.participantListDisplay.uuidList,
-    displayIndexStale: state.participantListDisplay.stale
+    displayIndexStale: state.participantListDisplay.stale,
+    city: state.participantFilters.currentCity,
+    showOnlyWithoutGroup: state.participantFilters.withoutGroupsAssignedOnly
   };
 };
 
@@ -103,8 +116,10 @@ const mapDispatchToProps = dispatch => {
     getParticipants: userId => getParticipants(dispatch, userId),
     addParticipant: (participantId, userId) =>
       addParticipant(dispatch, participantId, userId),
-    filterParticipantList: (user, participants, filterConditions) =>
-      dispatch(filterParticipantList(user, participants, filterConditions))
+    filterParticipantList: (participants, filterConditions) =>
+      dispatch(filterParticipantList(participants, filterConditions)),
+    setShowOnlyWithoutGroup: show =>
+      dispatch(showOnlyParticipantsWithoutGroup(show))
   };
 };
 

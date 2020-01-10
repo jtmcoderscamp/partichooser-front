@@ -2,7 +2,7 @@
   text-align: center;
   background-color: #c4c4c4;
 }
-h1 {
+.student-form h1 {
   text-align: center;
   margin: 3%;
   text-decoration: underline;
@@ -10,33 +10,40 @@ h1 {
   text-underline-position: under;
 }
 
-.inputBar {
+.student-form .inputBar {
   margin: 20px auto;
   width: 60%;
   border-color: #ffc53d;
 }
-
-.inp {
+.student-form .inp {
+  border-color: #ffc53d;
+}
+.student-form .ant-select-selection {
+  border-color: #ffc53d;
+}
+.student-form .inputWithE {
+  border-color: #ffc53d;
+}
+.student-form .inputWithoutE {
   border-color: #ffc53d;
 }
 
-.btn {
+.student-form .btn {
   text-align: center;
   background-color: #c4c4c4;
 }
-.btn:hover {
-  text-align: center;
+.student-form .btn:hover {
   background-color: #c4c4c4;
 }
 
-.addStudentBtn:hover {
+.student-form .addStudentBtn:hover {
   background-color: #ffc53d;
   border-color: #ffc53d;
   color: black;
   transform: scale(1.1);
 }
 
-.addStudentBtn {
+.student-form .addStudentBtn {
   background-color: #ffc53d;
   border-color: #ffc53d;
   color: black;
