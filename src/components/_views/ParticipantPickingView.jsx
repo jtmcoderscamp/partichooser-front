@@ -21,7 +21,6 @@ class ParticipantPickingView extends React.PureComponent {
     this.state = {
       /**@type {{field: string, value: string}[]} - this table represents the filter conditions as {field: value} pairs */
       filterConditions: [
-        { field: "name", value: "a" },
         { field: "city", value: props.city || "" },
         { field: "withoutGroup", value: props.showOnlyWithoutGroup }
       ]
