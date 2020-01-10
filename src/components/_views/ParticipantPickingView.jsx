@@ -100,12 +100,14 @@ class ParticipantPickingView extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
+  console.log("CITY: ", state.participantFilters);
   return {
     user: state.userAuth,
     participants: state.participants.data,
     isLoading: state.participants.loading,
     displayIndex: state.participantListDisplay.uuidList,
     displayIndexStale: state.participantListDisplay.stale,
+    city: state.participantFilters.currentCity,
     showOnlyWithoutGroup: state.participantFilters.withoutGroupsAssignedOnly
   };
 };

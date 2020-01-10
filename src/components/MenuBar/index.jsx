@@ -4,6 +4,7 @@ import "./menuBar.css";
 import { Button, Menu } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import logOut from "../../redux/actions/logOut";
+import { setCurrentCityFilter } from "../../redux/actions/filters";
 
 class MenuBar extends React.Component {
   constructor(props) {
@@ -11,22 +12,13 @@ class MenuBar extends React.Component {
     //this.state
   }
 
-  createListOfCities(currentcity = "X") {
-    const list = [
-      "Kraków",
-      "Warszawa",
-      "Wrocław",
-      "Gdańsk",
-      "Zabrze",
-      "Szczecin",
-      "Poznań"
-    ];
-    return list.filter(element => element != currentcity);
+  handleCitySelect(e) {
+    this.props.selectCity(e.key);
   }
 
   render() {
     //if you pass the current city it won't appear
-    const list = this.createListOfCities();
+    const list = this.props.listOfCities;
     return (
       <div className="menu">
         <div className="ikona">
@@ -35,7 +27,11 @@ class MenuBar extends React.Component {
         <div className="buttons">
           <Menu mode="horizontal">
             {this.props.children}
-            <SubMenu title="Change city">
+            <SubMenu
+              title="Change city"
+              onClick={this.handleCitySelect.bind(this)}
+            >
+              <Menu.Item key="any">-ANY CITY-</Menu.Item>
               {list.map(cityName => {
                 return <Menu.Item key={cityName}>{cityName}</Menu.Item>;
               })}
@@ -54,7 +50,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logOut: () => dispatch(logOut())
+    logOut: () => dispatch(logOut()),
+    selectCity: cityName => dispatch(setCurrentCityFilter(cityName))
   };
 };
 

@@ -13,11 +13,23 @@ import MenuBar from "./MenuBar";
  * But when some views are really created, we'll be using this more
  */
 class App extends React.Component {
+  static get listOfCities() {
+    return [
+      "Kraków",
+      "Warszawa",
+      "Wrocław",
+      "Gdańsk",
+      "Zabrze",
+      "Szczecin",
+      "Poznań"
+    ];
+  }
+
   render() {
     return (
       <Router>
         <div>
-          <MenuBar>
+          <MenuBar listOfCities={App.listOfCities}>
             <Menu.Item>
               <Link to="/">HOME</Link>
             </Menu.Item>
