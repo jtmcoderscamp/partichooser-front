@@ -17,8 +17,8 @@ export const UPDATE_PARTICIPANT_LIST_DISPLAY =
  *        }>} participants - list of participants to be filtered
  * @param {{field: string, value: string}[]} conditions
  */
-export function filterParticipantList(user, participants, conditions = []) {
-  const filteredList = _filterParticipants(user, participants, conditions);
+export function filterParticipantList(participants, conditions = []) {
+  const filteredList = _filterParticipants(participants, conditions);
   return {
     type: UPDATE_PARTICIPANT_LIST_DISPLAY,
     payload: filteredList
@@ -43,16 +43,19 @@ export function filterParticipantList(user, participants, conditions = []) {
  *        }>} participants
  * @param {{field: string, value: string}[]} conditions
  */
-function _filterParticipants(user, participants, conditions) {
-  console.log("filteritos", user, participants, conditions);
+function _filterParticipants(participants, conditions) {
   const lowercaseConditions = conditions.map(condition => {
-    return { field: condition.field, value: condition.value.toLowerCase() };
+    return {
+      field: condition.field,
+      value:
+        typeof condition.value === "string"
+          ? condition.value.toLowerCase()
+          : condition.value
+    };
   });
-  const filteredParticipantIdList = Object.keys(participants)
-    .filter(uuid => user.uuid !== participants[uuid].groupUuid)
-    .filter(uuid =>
-      _checkParticipantFilter(participants[uuid], lowercaseConditions)
-    );
+  const filteredParticipantIdList = Object.keys(participants).filter(uuid =>
+    _checkParticipantFilter(participants[uuid], lowercaseConditions)
+  );
   return filteredParticipantIdList;
 }
 
@@ -76,7 +79,12 @@ function _filterParticipants(user, participants, conditions) {
  */
 function _checkParticipantFilter(participant, conditions) {
   for (const condition of conditions) {
-    if (
+    if (condition.field === "withoutGroup") {
+      if (condition.value) {
+        return !participant.groupUuid;
+      }
+      return true;
+    } else if (
       participant[condition.field].toLowerCase().indexOf(condition.value) === -1
     ) {
       return false;

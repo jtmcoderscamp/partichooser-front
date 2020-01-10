@@ -5,8 +5,16 @@
   box-shadow: inset 0 -3px 0 0 #ffc53d;
 }
 
-.dark {
+.dark-background {
   background-color: #c4c4c4;
+}
+
+.yellow-background {
+  background-color: #ffc53d91;
+}
+
+.red-background {
+  background-color: #ff00003f;
 }
 
 .container {
