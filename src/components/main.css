@@ -1,0 +1,48 @@
+.container {
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin: 3%;
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
+}
+
+.ant-input {
+  margin: 2%;
+  border-color: #ffc53d;
+  width: 100%;
+}
+
+.ant-btn {
+  border-color: #ffc53d;
+  color: #ffc53d;
+  outline: none;
+  margin: 3%;
+}
+
+.ant-btn:focus {
+  border-color: #ffc53d;
+  color: #ffc53d;
+}
+
+.modified-item:hover {
+  border-color: #f3ad0b !important;
+  color: #f3ad0b !important;
+}
+
+.input-hover:hover {
+  border-color: #f3ad0b !important;
+}
+
+.ant-input:active {
+  border-color: #f3ad0b;
+  outline: none;
+}
+
+.ant-input:focus {
+  border-color: #f3ad0b;
+  box-shadow: none;
+}

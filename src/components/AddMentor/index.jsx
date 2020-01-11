@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import logInButFake from "../../redux/actions/logInButFake";
 import { withRouter } from "react-router";
+import TitledContainer from "../TitledContainer";
 
 import axios from "axios";
 import MentorForm from "../MentorForm";
+
+import "./addMentor.css";
 
 class FakeLogInForm extends React.Component {
   state = {
@@ -62,15 +65,17 @@ class FakeLogInForm extends React.Component {
   }
   render() {
     return (
-      <>
-        <MentorForm
-          onNameChange={this.onUserNameChange.bind(this)}
-          onSurnameChange={this.onUserSurnameChange.bind(this)}
-          onMailChange={this.onUserMailChange.bind(this)}
-          onButtonClick={this.onLogInButtonClick.bind(this)}
-          onShouldAlert={this.state.shouldAlert}
-        />
-      </>
+      <div className="mentor-form-wrapper">
+        <TitledContainer message="Add Mentor" className="titled-form">
+          <MentorForm
+            onNameChange={this.onUserNameChange.bind(this)}
+            onSurnameChange={this.onUserSurnameChange.bind(this)}
+            onMailChange={this.onUserMailChange.bind(this)}
+            onButtonClick={this.onLogInButtonClick.bind(this)}
+            onShouldAlert={this.state.shouldAlert}
+          />
+        </TitledContainer>
+      </div>
     );
   }
 }

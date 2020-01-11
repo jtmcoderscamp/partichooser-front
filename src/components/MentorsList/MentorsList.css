@@ -14,14 +14,6 @@ li.mentorcontainer > div {
   align-items: center;
 }
 
-h1 {
-  text-align: center;
-  margin: 3%;
-  text-decoration: underline;
-  text-decoration-color: #ffc53d;
-  text-underline-position: under;
-}
-
 .actions {
   display: flex;
   justify-content: center;

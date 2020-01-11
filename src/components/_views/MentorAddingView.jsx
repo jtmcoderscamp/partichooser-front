@@ -1,13 +1,10 @@
 import React from "react";
-import MentorsList from "../MentorsList";
-import MentorForm from "../MentorForm";
+import AddMentor from "../AddMentor";
 
-const MentorAddingView = () => {
+export default function MentorAddingView() {
   return (
-    <div>
-      <MentorForm />
+    <div className="container">
+      <AddMentor />
     </div>
   );
-};
-
-export default MentorAddingView;
+}

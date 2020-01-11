@@ -1,0 +1,19 @@
+.mentor-form-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.titled-form {
+  margin: auto 0;
+  width: 30%;
+}
+.inputscontainer {
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
