@@ -17,7 +17,6 @@ import { filterParticipantList } from "../../redux/actions/updateParticipantList
 class ParticipantPickingView extends React.PureComponent {
   constructor(props) {
     super(props);
-    console.log("update me", props);
     this.state = {
       /**@type {{field: string, value: string}[]} - this table represents the filter conditions as {field: value} pairs */
       filterConditions: [
@@ -35,12 +34,10 @@ class ParticipantPickingView extends React.PureComponent {
   }
 
   componentDidUpdate(oldProps) {
-    console.log("did update", oldProps, this.props);
     if (
       oldProps.city !== this.props.city ||
       oldProps.showOnlyWithoutGroup !== this.props.showOnlyWithoutGroup
     ) {
-      console.log("update me", this.props);
       this.props.filterParticipantList(this.props.participants, [
         { field: "name", value: "a" },
         { field: "city", value: this.props.city || "" },
@@ -68,15 +65,8 @@ class ParticipantPickingView extends React.PureComponent {
     } = this.props;
     const userId = user.uuid;
 
-    console.log("participants picking view props", this.props);
-
     return (
       <div style={{ width: "100%" }}>
-        <div>
-          {user.name
-            ? `You're logged in as "${user.name}"`
-            : `You're not logged in`}
-        </div>
         {isLoading ? (
           <Loader />
         ) : (
@@ -99,7 +89,6 @@ class ParticipantPickingView extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log("CITY: ", state.participantFilters);
   return {
     user: state.userAuth,
     participants: state.participants.data,

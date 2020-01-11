@@ -2,13 +2,6 @@
   text-align: center;
   background-color: #c4c4c4;
 }
-.student-form h1 {
-  text-align: center;
-  margin: 3%;
-  text-decoration: underline;
-  text-decoration-color: #ffc53d;
-  text-underline-position: under;
-}
 
 .student-form .inputBar {
   margin: 20px auto;

@@ -1,4 +1,6 @@
 import "antd/dist/antd.css";
+import "./main.css";
+
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -8,11 +10,8 @@ import MentorManagementView from "./_views/MentorManagementView";
 import ParticipantsManagementView from "./_views/ParticipantsManagementView";
 import MenuBar from "./MenuBar";
 import ParticipantAddingView from "./_views/ParticipantAddingView";
+import MentorAddingView from "./_views/MentorAddingView";
 
-/**
- * A simple router - not much to navigate as the work on the app has barely even started.
- * But when some views are really created, we'll be using this more
- */
 class App extends React.Component {
   static get listOfCities() {
     return [
@@ -29,29 +28,42 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
-          <MenuBar listOfCities={App.listOfCities}>
-            <Menu.Item>
-              <Link to="/">HOME</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/mentors">Mentor management</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/participants">Participants</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/participants/add">Add Participant</Link>
-            </Menu.Item>
-          </MenuBar>
-        </div>
+        {this._checkUserAuth() && (
+          <div>
+            <MenuBar listOfCities={App.listOfCities} hideLogo={true}>
+              {this._checkUserAuth("admin") && (
+                <Menu.Item>
+                  <Link to="/mentors">Mentor list</Link>
+                </Menu.Item>
+              )}
+              {this._checkUserAuth("admin") && (
+                <Menu.Item>
+                  <Link to="/mentors/add">Add mentor</Link>
+                </Menu.Item>
+              )}
+              <Menu.Item>
+                <Link to="/participants">Participants</Link>
+              </Menu.Item>
+              {this._checkUserAuth("admin") && (
+                <Menu.Item>
+                  <Link to="/participants/add">Add Participant</Link>
+                </Menu.Item>
+              )}
+            </MenuBar>
+          </div>
+        )}
 
         <Switch>
           <Route path="/participants/add">
-            <ParticipantAddingView listOfCities={App.listOfCities} />
+            {this._authProtect(
+              <ParticipantAddingView listOfCities={App.listOfCities} />
+            )}
           </Route>
           <Route path="/participants">
             {this._authProtect(<ParticipantsManagementView />)}
+          </Route>
+          <Route path="/mentors/add">
+            {this._authProtect(<MentorAddingView />)}
           </Route>
           <Route path="/mentors">
             {this._authProtect(<MentorManagementView />)}
@@ -64,6 +76,20 @@ class App extends React.Component {
     );
   }
 
+  /**
+   * Checks if user is logged in and has specific role (if any required - with no argument, method checks only if someone is logged in)
+   * @param {string} requiredRole - the optional role to be checked for
+   */
+  _checkUserAuth(requiredRole) {
+    return (
+      this.props.logInStatus &&
+      this.props.logInStatus === "success" &&
+      (!requiredRole ||
+        (this.props.userRoles &&
+          this.props.userRoles.indexOf(requiredRole) >= 0))
+    );
+  }
+
   _authProtect(view) {
     if (this.props.logInStatus && this.props.logInStatus === "success") {
       return view;
@@ -73,7 +99,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    logInStatus: state.userAuth.status
+    logInStatus: state.userAuth.status,
+    userRoles: state.userAuth.roles
   };
 };
 

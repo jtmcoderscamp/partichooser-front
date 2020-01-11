@@ -1,0 +1,10 @@
+.titled-container {
+  width: 100%;
+  height: 100%;
+}
+
+.pagetitle {
+  text-decoration: underline;
+  text-decoration-color: #ffc53d;
+  text-underline-position: under;
+}
