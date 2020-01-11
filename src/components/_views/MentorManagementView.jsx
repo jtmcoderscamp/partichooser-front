@@ -1,6 +1,3 @@
-// import React from "react";
-// import SampleComponent from "../SampleComponent";
-
 import React from "react";
 import MentorsList from "../MentorsList";
 

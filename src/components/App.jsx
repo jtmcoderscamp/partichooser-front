@@ -8,6 +8,7 @@ import MentorManagementView from "./_views/MentorManagementView";
 import ParticipantsManagementView from "./_views/ParticipantsManagementView";
 import MenuBar from "./MenuBar";
 import ParticipantAddingView from "./_views/ParticipantAddingView";
+import MentorAddingView from "./_views/MentorAddingView";
 
 /**
  * A simple router - not much to navigate as the work on the app has barely even started.
@@ -35,7 +36,10 @@ class App extends React.Component {
               <Link to="/">HOME</Link>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/mentors">Mentor management</Link>
+              <Link to="/mentors">Mentor list</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/mentors/add">Add mentor</Link>
             </Menu.Item>
             <Menu.Item>
               <Link to="/participants">Participants</Link>
@@ -53,8 +57,11 @@ class App extends React.Component {
           <Route path="/participants">
             {this._authProtect(<ParticipantsManagementView />)}
           </Route>
+          <Route path="/mentors/add">
+            <MentorAddingView />
+          </Route>
           <Route path="/mentors">
-            {this._authProtect(<MentorManagementView />)}
+            <MentorManagementView />
           </Route>
           <Route path="/">
             {this._authProtect(<ParticipantsManagementView />)}
